@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public interface GameControllerRepository extends JpaRepository<Game, Integer> {
+    @Repository
+    public interface GameControllerRepository extends JpaRepository<Game, Integer> {
 
-    public List<Game> findGamesByStudio(String studio);
-    public List<Game> findGamesByEsrbRating(String esrbRating);
-    public Optional<Game> findGameByTitle(String title);
-}
+        public List<Game> findGamesByStudio(String studio);
+        public List<Game> findGamesByEsrbRating(String esrbRating);
+        public Optional<Game> findGameByTitle(String title);
+    }
