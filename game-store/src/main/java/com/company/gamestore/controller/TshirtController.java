@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,9 +14,9 @@ public class TshirtController {
     @Autowired
     TshirtRepository shirtRepo;
 
-    @RequestMapping(value = "/tshirt", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public Tshirt createTshirt(@RequestBody @Valid Tshirt shirt) {
+    @PostMapping("/tshirt")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Tshirt createTshirt(@RequestBody Tshirt shirt) {
 
         shirt.setId(shirt.getId());
         shirt.setSize(shirt.getSize());
@@ -30,8 +29,8 @@ public class TshirtController {
         return shirt;
     }
 
-    @RequestMapping(value = "/tshirt/{id}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/tshirt/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public Tshirt getShirt(@PathVariable Integer id) {
 
         List<Tshirt> shirts = shirtRepo.findAll();
@@ -46,15 +45,15 @@ public class TshirtController {
         return shirt;
     }
 
-    @RequestMapping(value = "/tshirt", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/tshirt")
+    @ResponseStatus(HttpStatus.OK)
     public List<Tshirt> getAllShirts() {
 
         return shirtRepo.findAll();
     }
 
-    @RequestMapping(value = "/tshirt/{id}", method = RequestMethod.PUT)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @PutMapping("/tshirt/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateShirt(@PathVariable Integer id, @RequestBody Tshirt shirt) {
 
         List<Tshirt> shirts = shirtRepo.findAll();
@@ -66,8 +65,8 @@ public class TshirtController {
         }
     }
 
-    @RequestMapping(value = "/tshirt/{id}", method = RequestMethod.DELETE)
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    @DeleteMapping("/tshirt/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteShirt(Integer id) {
 
         List<Tshirt> shirts = shirtRepo.findAll();
@@ -79,8 +78,8 @@ public class TshirtController {
         }
     }
 
-    @RequestMapping(value = "/tshirt/{color}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/tshirt/{color}")
+    @ResponseStatus(HttpStatus.OK)
     public Tshirt findByColor(@PathVariable String color) {
 
         List<Tshirt> shirts = shirtRepo.findAll();
@@ -95,8 +94,8 @@ public class TshirtController {
         return shirt;
     }
 
-    @RequestMapping(value = "/tshirt/{size}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping("/tshirt/{size}")
+    @ResponseStatus(HttpStatus.OK)
     public Tshirt findBySize(@PathVariable String size) {
 
         List<Tshirt> shirts = shirtRepo.findAll();
