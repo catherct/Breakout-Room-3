@@ -43,8 +43,7 @@ public class ConsoleController {
     @PostMapping("/console")
     @ResponseStatus(HttpStatus.CREATED)
     public Console addConsole(@RequestBody Console sample_console) {
-        //weird behaviour .. dunno why
-        return  repo.save(sample_console);
+        return repo.save(sample_console);
     }
 
     //update Console

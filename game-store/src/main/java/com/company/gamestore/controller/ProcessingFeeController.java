@@ -1,7 +1,6 @@
 package com.company.gamestore.controller;
 
 import com.company.gamestore.repository.ProcessingFeesRepository;
-import com.company.gamestore.repository.SalesTaxRateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
