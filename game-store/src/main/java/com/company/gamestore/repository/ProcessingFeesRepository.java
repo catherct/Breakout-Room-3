@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.math.BigDecimal;
 import java.util.Optional;
 
-public interface ProcessingFeesRepository extends JpaRepository <ProcessingFee, String> {
+public interface ProcessingFeesRepository extends JpaRepository<ProcessingFee, Integer> {
     Optional<BigDecimal> findProcessingFeesByProduct (String product);
 }

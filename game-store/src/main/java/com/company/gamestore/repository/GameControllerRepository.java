@@ -12,5 +12,5 @@ import java.util.Optional;
 
         public List<Game> findGamesByStudio(String studio);
         public List<Game> findGamesByEsrbRating(String esrbRating);
-        public Optional<Game> findGameByTitle(String title);
+        public List<Game> findGamesByTitle(String title);
     }
