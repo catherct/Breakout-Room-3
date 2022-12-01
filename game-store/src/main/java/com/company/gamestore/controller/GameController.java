@@ -2,6 +2,8 @@ package com.company.gamestore.controller;
 
 import com.company.gamestore.model.Game;
 import com.company.gamestore.repository.GameControllerRepository;
+import com.company.gamestore.service.ServiceLayer;
+import com.company.gamestore.viewmodel.GameViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,76 +13,56 @@ import java.util.Optional;
 
 @RestController
 public class GameController {
+
     @Autowired
-    private GameControllerRepository gameRepo;
+    private ServiceLayer serviceLayer;
 
     @PostMapping("/game")
     @ResponseStatus(HttpStatus.CREATED)
-    public Game createGame(@RequestBody Game game){
-        return gameRepo.save(game);
+    public GameViewModel createGame(@RequestBody GameViewModel game){
+        return serviceLayer.saveGame(game);
     }
 
     @GetMapping("/game/id/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Game getGameById(@PathVariable Integer id){
-        Optional<Game> game = gameRepo.findById(id);
-
-        if(game.isPresent()){
-            return game.get();
-        }
-
-        return null;
+    public GameViewModel getGameById(@PathVariable Integer id){
+        return serviceLayer.findGame(id);
     }
 
     @GetMapping("/game")
     @ResponseStatus(HttpStatus.OK)
-    public List<Game> getAllGames(){
-        return gameRepo.findAll();
+    public List<GameViewModel> getAllGames(){
+        return serviceLayer.findAllGames();
     }
 
     @PutMapping("/game")
-    @ResponseStatus(HttpStatus.OK)
-    public void updateGame(@RequestBody Game game){
-        Optional<Game> oldGame = gameRepo.findById(game.getId());
-        if(oldGame.isPresent()){
-            oldGame.get()
-                    .setDescription(game.getDescription())
-                    .setEsrbRating(game.getEsrbRating())
-                    .setPrice(game.getPrice())
-                    .setQuantity(game.getQuantity())
-                    .setStudio(game.getStudio())
-                    .setTitle(game.getTitle());
-            gameRepo.save(oldGame.get());
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateGame(@RequestBody GameViewModel game){
+        serviceLayer.updateGame(game);
     }
 
     @DeleteMapping("/game")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable Integer id){
-        gameRepo.deleteById(id);
+        serviceLayer.deleteGame(id);
     }
 
     @GetMapping("/game/studio/{studio}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Game> getGamesByStudio(@PathVariable String studio){
-        return gameRepo.findGamesByStudio(studio);
+    public List<GameViewModel> getGamesByStudio(@PathVariable String studio){
+        return serviceLayer.findGamesByStudio(studio);
     }
 
     @GetMapping("/game/esrb/{esrb}")
     @ResponseStatus(HttpStatus.OK)
-    public List<Game> getGamesByEsrbRating(@PathVariable String esrb){
-        return gameRepo.findGamesByEsrbRating(esrb);
+    public List<GameViewModel> getGamesByEsrbRating(@PathVariable String esrb){
+        return serviceLayer.findGamesByEsrbRating(esrb);
     }
 
     @GetMapping("/game/title/{title}")
     @ResponseStatus(HttpStatus.OK)
-    public Game getGameByTitle(@PathVariable String title){
-        Optional<Game> game = gameRepo.findGameByTitle(title);
-        if (game.isPresent()){
-            return game.get();
-        }
-
-        return null;
+    public List<GameViewModel> getGameByTitle(@PathVariable String title){
+        return serviceLayer.findGamesByTitle(title);
     }
 
 

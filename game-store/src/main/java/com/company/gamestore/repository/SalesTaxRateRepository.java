@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-public interface SalesTaxRateRepository extends JpaRepository {
+public interface SalesTaxRateRepository extends JpaRepository<SalesTaxRate, Integer> {
     Optional<BigDecimal> findSalesTaxRateByState (String state);
 }

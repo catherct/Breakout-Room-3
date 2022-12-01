@@ -44,7 +44,7 @@ public class ConsoleController {
     @ResponseStatus(HttpStatus.CREATED)
     public Console addConsole(@RequestBody Console sample_console) {
         //weird behaviour .. dunno why
-        return (Console) repo.save(sample_console);
+        return  repo.save(sample_console);
     }
 
     //update Console
