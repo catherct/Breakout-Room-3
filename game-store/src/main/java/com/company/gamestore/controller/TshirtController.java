@@ -1,7 +1,7 @@
 package com.company.gamestore.controller;
 
-import com.company.gamestore.model.Tshirt;
-import com.company.gamestore.repository.TshirtRepository;
+import com.company.gamestore.service.ServiceLayer;
+import com.company.gamestore.viewmodel.TshirtViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -12,101 +12,70 @@ import java.util.List;
 public class TshirtController {
 
     @Autowired
-    TshirtRepository shirtRepo;
+    private ServiceLayer serviceLayer;
 
+    // create new shirt
     @PostMapping("/tshirt")
     @ResponseStatus(HttpStatus.CREATED)
-    public Tshirt createTshirt(@RequestBody Tshirt shirt) {
+    public TshirtViewModel createTshirt(@RequestBody TshirtViewModel shirt) {
 
-        shirt.setId(shirt.getId());
-        shirt.setSize(shirt.getSize());
-        shirt.setColor(shirt.getColor());
-        shirt.setDescription(shirt.getDescription());
-        shirt.setPrice(shirt.getPrice());
-        shirt.setQuantity(shirt.getQuantity());
-        shirtRepo.save(shirt);
-
-        return shirt;
+        return serviceLayer.saveTShirt(shirt);
     }
 
+    // retrieve shirt by id
     @GetMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Tshirt getShirt(@PathVariable Integer id) {
+    public TshirtViewModel getShirt(@PathVariable Integer id) {
 
-        List<Tshirt> shirts = shirtRepo.findAll();
+        TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
-        Tshirt shirt = null;
-
-        for (Tshirt favoriteShirt : shirts) {
-            if (favoriteShirt.getId() == id) {
-                shirt = favoriteShirt;
-            }
+        if (targetShirt == null) {
+            throw new IllegalArgumentException("Error: Entry does not exist.");
         }
-        return shirt;
+        return targetShirt;
     }
 
+    // retrieve all shirts
     @GetMapping("/tshirt")
     @ResponseStatus(HttpStatus.OK)
-    public List<Tshirt> getAllShirts() {
+    public List<TshirtViewModel> getAllShirts() {
 
-        return shirtRepo.findAll();
+        return serviceLayer.findAllTShirts();
     }
 
+    // update existing shirt
     @PutMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateShirt(@PathVariable Integer id, @RequestBody Tshirt shirt) {
+    public void updateShirt(@PathVariable Integer id, @RequestBody TshirtViewModel shirt) {
 
-        List<Tshirt> shirts = shirtRepo.findAll();
+        TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
-        for (Tshirt favoriteShirt : shirts) {
-            if (favoriteShirt.getId() == id) {
-                shirts.set(favoriteShirt.getId(), shirt);
-            }
-        }
+        serviceLayer.updateTShirt(targetShirt);
     }
 
+    // delete existing shirt
     @DeleteMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteShirt(Integer id) {
+    public void deleteShirt(@PathVariable Integer id) {
 
-        List<Tshirt> shirts = shirtRepo.findAll();
+        TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
-        for (Tshirt leastFavoriteShirt : shirts) {
-            if (leastFavoriteShirt.getId() == id) {
-                shirts.remove(leastFavoriteShirt.getId()); // suspicious collections method calls
-            }
-        }
+        serviceLayer.deleteTShirt(id);
     }
 
+    // retrieve shirt by color
     @GetMapping("/tshirt/{color}")
     @ResponseStatus(HttpStatus.OK)
-    public Tshirt findByColor(@PathVariable String color) {
+    public List<TshirtViewModel> findByColor(@PathVariable String color) {
 
-        List<Tshirt> shirts = shirtRepo.findAll();
-
-        Tshirt shirt = null;
-
-        for (Tshirt favoriteShirt : shirts) {
-            if (favoriteShirt.getColor() == color) {
-                shirt = favoriteShirt;
-            }
-        }
-        return shirt;
+        return serviceLayer.findTShirtsByColor(color);
     }
 
+    // retrieve shirt by size
     @GetMapping("/tshirt/{size}")
     @ResponseStatus(HttpStatus.OK)
-    public Tshirt findBySize(@PathVariable String size) {
+    public List<TshirtViewModel> findBySize(@PathVariable String size) {
 
-        List<Tshirt> shirts = shirtRepo.findAll();
-
-        Tshirt shirt = null;
-
-        for (Tshirt favoriteShirt : shirts) {
-            if (favoriteShirt.getSize() == size) {
-                shirt = favoriteShirt;
-            }
-        }
-        return shirt;
+        return serviceLayer.findTShirtsBySize(size);
     }
 }
