@@ -18,18 +18,18 @@ public class ProcessingFee {
     @Column(name = "product_type")
     @NotNull
     @Size(max=20)
-    private String product_type;
+    private String productType;
 
     @NotNull
     @Digits(integer=4, fraction=2)
     private BigDecimal fee;
 
     public String getProduct_type() {
-        return product_type;
+        return productType;
     }
 
     public void setProduct_type(String product_type) {
-        this.product_type = product_type;
+        this.productType = product_type;
     }
 
     public BigDecimal getFee() {
@@ -45,18 +45,18 @@ public class ProcessingFee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProcessingFee that = (ProcessingFee) o;
-        return product_type.equals(that.product_type) && fee.equals(that.fee);
+        return productType.equals(that.productType) && fee.equals(that.fee);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(product_type, fee);
+        return Objects.hash(productType, fee);
     }
 
     @Override
     public String toString() {
         return "ProcessingFee{" +
-                "product_type='" + product_type + '\'' +
+                "product_type='" + productType + '\'' +
                 ", fee=" + fee +
                 '}';
     }

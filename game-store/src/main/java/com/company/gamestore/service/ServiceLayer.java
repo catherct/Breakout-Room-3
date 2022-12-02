@@ -1,9 +1,6 @@
 package com.company.gamestore.service;
 
-import com.company.gamestore.model.Console;
-import com.company.gamestore.model.Game;
-import com.company.gamestore.model.Invoice;
-import com.company.gamestore.model.Tshirt;
+import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
 import com.company.gamestore.viewmodel.GameViewModel;
@@ -370,19 +367,19 @@ public class ServiceLayer {
 
     //INVOICE API
 
-    @Transactional
+/*    @Transactional
     public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
         Invoice invoice = buildInvoice(viewModel);
-        Optional<BigDecimal> processingFee = processingFeesRepo.findProcessingFeesByProduct(invoice.getItemType());
-        Optional<BigDecimal> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
+        Optional<ProcessingFee> processingFee = processingFeesRepo.findProcessingFeesByProduct(invoice.getItemType());
+        Optional<SalesTaxRate> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
 
         //throw an exception here
         if(invoice.getQuantity() < 0){
 
         }
         //check exceptions here to make sure the processing fee and sales tax are present first
-        invoice.setTax(salesTax.get());
-        invoice.setProcessingFee(processingFee.get());
+        invoice.setTax(salesTax.get().getRate());
+        invoice.setProcessingFee(processingFee.get().getFee());
 
 
         BigDecimal total = BigDecimal.ZERO;
@@ -457,7 +454,7 @@ public class ServiceLayer {
 
         return viewModel;
 
-    }
+    }*/
 
     public InvoiceViewModel findInvoice(Integer id){
         Optional<Invoice> invoice = invoiceRepo.findById(id);
