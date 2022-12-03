@@ -14,6 +14,7 @@ import java.util.Optional;
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.junit.Assert.*;
 
 public class ServiceLayerTest {
 
@@ -193,43 +194,4 @@ public class ServiceLayerTest {
         assertFalse(sampleShirts.isEmpty());
 
     }
-
-//    @Test
-//    public void shouldUpdateShirt() {
-//
-//        // arrange
-//        TshirtViewModel toCompare = new TshirtViewModel();
-//        toCompare.setId(1);
-//        toCompare.setColor("blue");
-//        toCompare.setSize("large");
-//        toCompare.setDescription("large blue shirt");             // for the repo tests
-//        toCompare.setPrice(BigDecimal.valueOf(13.99));
-//        toCompare.setQuantity(2);
-//
-//        // act
-//        TshirtViewModel tshirtViewModel = service.findTShirt(1);
-//        service.updateTShirt(toCompare);
-//        assertEquals(tshirtViewModel, toCompare);
-//
-//    }
-//
-//    @Test
-//    public void shouldDeleteShirt() {
-//
-//        // arrange
-//        TshirtViewModel toCompare = new TshirtViewModel();
-//        toCompare.setId(1);
-//        toCompare.setColor("blue");
-//        toCompare.setSize("large");
-//        toCompare.setDescription("large blue shirt");
-//        toCompare.setPrice(BigDecimal.valueOf(13.99));
-//        toCompare.setQuantity(2);
-//
-//        // act
-//        TshirtViewModel tshirtViewModel = service.findTShirt(1);
-//        service.deleteTShirt(1);
-//        assertFalse(service.findTShirt(1));
-//
-//    }
-
 }
