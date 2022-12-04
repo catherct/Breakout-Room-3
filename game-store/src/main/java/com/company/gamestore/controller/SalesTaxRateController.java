@@ -15,18 +15,4 @@ import java.util.Optional;
 @RestController
 public class SalesTaxRateController {
 
-
-//    @Autowired
-//    SalesTaxRateRepository repo;
-//
-//    //Get sales tax rate by state
-//    @GetMapping("/sales_tax_rate/{state}")
-//    @ResponseStatus(value = HttpStatus.OK)
-//    public Optional<BigDecimal> getSalesTaxRateByState(@PathVariable String state) {
-//
-//        Optional<BigDecimal> returnVal = repo.findSalesTaxRateByState(state);
-//        return repo.findSalesTaxRateByState(state);
-//    }
-
-
 }

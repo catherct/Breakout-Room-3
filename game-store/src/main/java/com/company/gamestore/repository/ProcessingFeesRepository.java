@@ -10,6 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ProcessingFeesRepository extends JpaRepository<ProcessingFee, Integer> {
 
-    Optional<ProcessingFee> findProcessingFeesByProductType (String product);
+
+   Optional<ProcessingFee> findProcessingFeesByProductType (String product);
 
 }
