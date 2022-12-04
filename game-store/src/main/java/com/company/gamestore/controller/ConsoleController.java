@@ -53,6 +53,6 @@ public class ConsoleController {
     @DeleteMapping("/console/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteConsole(@PathVariable int id) {
-        serviceLayer.deleteGame(id);
+        serviceLayer.removeConsole(id);
     }
 }
