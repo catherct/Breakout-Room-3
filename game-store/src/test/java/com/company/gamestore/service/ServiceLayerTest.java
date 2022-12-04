@@ -81,7 +81,7 @@ public class ServiceLayerTest {
 
         // act
         newShirt = service.saveTShirt(newShirt);
-        assertTrue(sampleShirts.isEmpty());     // NullPointerException -- cannot getId() bc "tshirt" is null
+        assertFalse(sampleShirts.isEmpty());    
 
     }
 
