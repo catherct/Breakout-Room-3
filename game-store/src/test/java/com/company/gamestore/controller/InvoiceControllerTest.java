@@ -1,6 +1,6 @@
 package com.company.gamestore.controller;
 
-import com.company.gamestore.model.Invoice;
+import com.company.gamestore.viewmodel.InvoiceViewModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,7 +28,7 @@ public class InvoiceControllerTest {
     // ObjectMapper
     private ObjectMapper mapper = new ObjectMapper();
 
-    private List<Invoice> invoiceList;
+    private List<InvoiceViewModel> invoiceList;
     @Before
     public void setUp() { }
 
@@ -38,7 +36,7 @@ public class InvoiceControllerTest {
     @Test
     public void shouldReturnNewInvoice() throws Exception {
         // Arrange
-        Invoice inputInvoice = new Invoice();
+        InvoiceViewModel inputInvoice = new InvoiceViewModel();
         inputInvoice.setName("Jose Salgado");
         inputInvoice.setStreet("1 Irvine Ln.");
         inputInvoice.setCity("Irvine");
@@ -50,7 +48,7 @@ public class InvoiceControllerTest {
 
         String inputJson = mapper.writeValueAsString(inputInvoice);
 
-        Invoice outputInvoice = new Invoice();
+        InvoiceViewModel outputInvoice = new InvoiceViewModel();
         inputInvoice.setName("Jose Salgado");
         inputInvoice.setStreet("1 Irvine Ln.");
         inputInvoice.setCity("Irvine");
@@ -84,7 +82,7 @@ public class InvoiceControllerTest {
     // Testing GET /invoice/{id}
     @Test
     public void shouldReturnInvoiceById() throws Exception {
-        Invoice outputInvoice = new Invoice();
+        InvoiceViewModel outputInvoice = new InvoiceViewModel();
         outputInvoice.setName("Jose Salgado");
         outputInvoice.setStreet("1 Irvine Ln.");
         outputInvoice.setCity("Irvine");
@@ -96,7 +94,7 @@ public class InvoiceControllerTest {
 
         String outputJson = mapper.writeValueAsString(outputInvoice);
 
-        // TODO check content()
+        // TODO check if content() is correct
         mockMvc.perform(get("/invoice/1"))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -107,7 +105,7 @@ public class InvoiceControllerTest {
     @Test
     public void shouldReturnInvoiceByName() throws Exception {
         // TODO go over this test
-        Invoice outputInvoice = new Invoice();
+        InvoiceViewModel outputInvoice = new InvoiceViewModel();
         outputInvoice.setName("Jose Salgado");
         outputInvoice.setStreet("1 Irvine Ln.");
         outputInvoice.setCity("Irvine");
@@ -117,13 +115,20 @@ public class InvoiceControllerTest {
         outputInvoice.setItemId(1);
         outputInvoice.setQuantity(1);
 
-        // compare list ???
+        invoiceList.add(outputInvoice);
+
+        String outputListJson = mapper.writeValueAsString(invoiceList);
+
+        mockMvc.perform(get("/invoice/name/Jose%20Salgado"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(outputListJson));
     }
 
     // Testing PUT /invoice
     @Test
     public void shouldUpdateInvoice() throws Exception {
-        Invoice inputInvoice = new Invoice();
+        InvoiceViewModel inputInvoice = new InvoiceViewModel();
         inputInvoice.setName("Jose Salgado");
         inputInvoice.setStreet("1 Silver Ln.");
         inputInvoice.setCity("Shafter");
