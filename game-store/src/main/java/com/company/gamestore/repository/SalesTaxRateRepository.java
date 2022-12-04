@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface SalesTaxRateRepository extends JpaRepository<SalesTaxRate, Integer> {
-    Optional<BigDecimal> findSalesTaxRateByState (String state);
+    Optional<SalesTaxRate> findSalesTaxRateByState (String state);
 }
