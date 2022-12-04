@@ -1,5 +1,6 @@
 package com.company.gamestore.controller;
 
+import com.company.gamestore.service.ServiceLayer;
 import com.company.gamestore.viewmodel.InvoiceViewModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -7,10 +8,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -24,6 +27,9 @@ public class InvoiceControllerTest {
     // Wiring in the MockMvc object
     @Autowired
     private MockMvc mockMvc;
+
+    @MockBean
+    private ServiceLayer serviceLayer;
 
     // ObjectMapper
     private ObjectMapper mapper = new ObjectMapper();
@@ -106,7 +112,7 @@ public class InvoiceControllerTest {
     public void shouldReturnInvoiceByName() throws Exception {
         // TODO go over this test
         InvoiceViewModel outputInvoice = new InvoiceViewModel();
-        outputInvoice.setName("Jose Salgado");
+        outputInvoice.setName("Jose");
         outputInvoice.setStreet("1 Irvine Ln.");
         outputInvoice.setCity("Irvine");
         outputInvoice.setState("CA");
@@ -115,11 +121,12 @@ public class InvoiceControllerTest {
         outputInvoice.setItemId(1);
         outputInvoice.setQuantity(1);
 
+        invoiceList = new ArrayList<>();
         invoiceList.add(outputInvoice);
 
         String outputListJson = mapper.writeValueAsString(invoiceList);
 
-        mockMvc.perform(get("/invoice/name/Jose%20Salgado"))
+        mockMvc.perform(get("/invoice/name/Jose"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().json(outputListJson));
@@ -142,7 +149,7 @@ public class InvoiceControllerTest {
         String inputJson = mapper.writeValueAsString(inputInvoice);
 
         mockMvc.perform(
-                put("invoice")
+                put("/invoice")
                         .content(inputJson)
                         .contentType(MediaType.APPLICATION_JSON)
         )
