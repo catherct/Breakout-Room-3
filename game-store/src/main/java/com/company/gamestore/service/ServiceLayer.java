@@ -398,7 +398,7 @@ public class ServiceLayer {
     @Transactional
     public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
         Invoice invoice = buildInvoice(viewModel);
-        Optional<ProcessingFee> processingFee = processingFeesRepo.findProcessingFeeByProductType(invoice.getItemType());
+        Optional<ProcessingFee> processingFee = processingFeesRepo.findProcessingFeesByProductType(invoice.getItemType());
         Optional<SalesTaxRate> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
 
         //throw an exception here

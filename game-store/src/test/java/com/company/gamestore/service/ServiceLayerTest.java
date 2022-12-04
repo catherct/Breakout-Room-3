@@ -370,7 +370,7 @@ public class ServiceLayerTest {
 
     // Helper methods
     private void setUpConsoleRepositoryMock() {
-        consoleControllerRepository = mock(ConsoleControllerRepository.class);
+        consoleRepo = mock(ConsoleControllerRepository.class);
         Console console = new Console();
         console.setConsole_id(1);
         console.setModel("Xbox-360");
@@ -396,10 +396,10 @@ public class ServiceLayerTest {
         List<Console> bList = new ArrayList<>();
         bList.add(console);
 
-        doReturn(console).when(consoleControllerRepository).save(console2);
-        doReturn(Optional.of(console)).when(consoleControllerRepository).findById(1);
-        doReturn(bList).when(consoleControllerRepository).findAll();
-        doReturn(bList).when(consoleControllerRepository).findConsoleByManufacturer("Microsoft");
+        doReturn(console).when(consoleRepo).save(console2);
+        doReturn(Optional.of(console)).when(consoleRepo).findById(1);
+        doReturn(bList).when(consoleRepo).findAll();
+        doReturn(bList).when(consoleRepo).findConsoleByManufacturer("Microsoft");
     }
 
     @Test
@@ -491,7 +491,7 @@ public class ServiceLayerTest {
     }
 
     private void setUpGameRepositoryMock(){
-        gameControllerRepository = mock(GameControllerRepository.class);
+        gameRepo = mock(GameControllerRepository.class);
         Game game = new Game();
         game.setId(1);
         game.setTitle("Halo");
@@ -517,12 +517,12 @@ public class ServiceLayerTest {
         List<Game> games2 = new ArrayList<>();
         games2.add(game);
 
-        doReturn(game).when(gameControllerRepository).save(game);
-        doReturn(Optional.of(game)).when(gameControllerRepository).findById(1);
-        doReturn(games).when(gameControllerRepository).findAll();
-        doReturn(games).when(gameControllerRepository).findGamesByEsrbRating("M");
-        doReturn(games2).when(gameControllerRepository).findGamesByStudio("Bungie");
-        doReturn(games2).when(gameControllerRepository).findGamesByTitle("Halo");
+        doReturn(game).when(gameRepo).save(game);
+        doReturn(Optional.of(game)).when(gameRepo).findById(1);
+        doReturn(games).when(gameRepo).findAll();
+        doReturn(games).when(gameRepo).findGamesByEsrbRating("M");
+        doReturn(games2).when(gameRepo).findGamesByStudio("Bungie");
+        doReturn(games2).when(gameRepo).findGamesByTitle("Halo");
 
     }
 
