@@ -1,9 +1,6 @@
 package com.company.gamestore.service;
 
-import com.company.gamestore.model.Console;
-import com.company.gamestore.model.Game;
-import com.company.gamestore.model.Invoice;
-import com.company.gamestore.model.Tshirt;
+import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
 import com.company.gamestore.viewmodel.GameViewModel;
@@ -111,6 +108,7 @@ public class ServiceLayer {
         console.setQuantity(viewModel.getQuantity());
         console.setProcessor(viewModel.getProcessor());
         console.setMemory_amount(viewModel.getMemory_amount());
+        console.setConsole_id(viewModel.getId());
         return console;
     }
 
@@ -158,6 +156,15 @@ public class ServiceLayer {
         return invoice;
     }
     //Console Api
+
+//    @Transactional
+//    public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
+//        Console console = buildConsole(viewModel);
+//
+//        console =  consoleRepo.save(console);
+//        viewModel.setId(console.getConsole_id());
+//        return viewModel;
+//    }
 
     @Transactional
     public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
@@ -373,7 +380,7 @@ public class ServiceLayer {
     @Transactional
     public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
         Invoice invoice = buildInvoice(viewModel);
-        Optional<BigDecimal> processingFee = processingFeesRepo.findProcessingFeesByProduct(invoice.getItemType());
+        Optional<BigDecimal> processingFee = processingFeesRepo.findProcessingFeesByProductType(invoice.getItemType());
         Optional<BigDecimal> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
 
         //throw an exception here

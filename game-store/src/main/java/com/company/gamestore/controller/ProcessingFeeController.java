@@ -21,7 +21,7 @@ public class ProcessingFeeController {
     @ResponseStatus(value = HttpStatus.OK)
     public Optional<BigDecimal> getProcessingFeesByProduct (@PathVariable String product) {
 
-        Optional<BigDecimal> returnVal = repo.findProcessingFeesByProduct (product);
-        return repo.findProcessingFeesByProduct(product);
+        Optional<BigDecimal> returnVal = repo.findProcessingFeesByProductType (product);
+        return repo.findProcessingFeesByProductType(product);
     }
 }
