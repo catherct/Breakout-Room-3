@@ -13,12 +13,14 @@ public class InvoiceController {
     @Autowired
     private ServiceLayer serviceLayer;
 
+
 //    // Create a new invoice.
 //    @PostMapping("/invoice")
 //    @ResponseStatus(HttpStatus.CREATED)
 //    public InvoiceViewModel addInvoice(@RequestBody InvoiceViewModel invoice) {
 //        return serviceLayer.saveInvoice(invoice);
 //    }
+
 
     // Find invoice by id.
     @GetMapping("/invoice/{id}")

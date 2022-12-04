@@ -1,9 +1,6 @@
 package com.company.gamestore.service;
 
-import com.company.gamestore.model.Console;
-import com.company.gamestore.model.Game;
-import com.company.gamestore.model.Invoice;
-import com.company.gamestore.model.Tshirt;
+import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
 import com.company.gamestore.viewmodel.GameViewModel;
@@ -154,6 +151,12 @@ public class ServiceLayer {
         invoice.setStreet(viewModel.getStreet());
         invoice.setZipcode(viewModel.getZipcode());
         invoice.setItemId(viewModel.getItemId());
+        invoice.setId(viewModel.getId());
+        invoice.setProcessingFee(viewModel.getProcessingFee());
+        invoice.setTax(viewModel.getTax());
+        invoice.setUnitPrice(viewModel.getUnitPrice());
+        invoice.setSubtotal(viewModel.getSubtotal());
+        invoice.setTotal(viewModel.getTotal());
 
         return invoice;
     }
@@ -458,6 +461,7 @@ public class ServiceLayer {
 //        return viewModel;
 //
 //    }
+
 
     public InvoiceViewModel findInvoice(Integer id){
         Optional<Invoice> invoice = invoiceRepo.findById(id);
