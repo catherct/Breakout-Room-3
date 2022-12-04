@@ -80,7 +80,7 @@ public class ServiceLayerTest {
 
         // act
         newShirt = service.saveTShirt(newShirt);
-        assertTrue(sampleShirts.isEmpty());     // NullPointerException -- cannot getId() bc "tshirt" is null
+        assertFalse(sampleShirts.isEmpty());    
 
     }
 
@@ -193,43 +193,5 @@ public class ServiceLayerTest {
         assertFalse(sampleShirts.isEmpty());
 
     }
-
-//    @Test
-//    public void shouldUpdateShirt() {
-//
-//        // arrange
-//        TshirtViewModel toCompare = new TshirtViewModel();
-//        toCompare.setId(1);
-//        toCompare.setColor("blue");
-//        toCompare.setSize("large");
-//        toCompare.setDescription("large blue shirt");             // for the repo tests
-//        toCompare.setPrice(BigDecimal.valueOf(13.99));
-//        toCompare.setQuantity(2);
-//
-//        // act
-//        TshirtViewModel tshirtViewModel = service.findTShirt(1);
-//        service.updateTShirt(toCompare);
-//        assertEquals(tshirtViewModel, toCompare);
-//
-//    }
-//
-//    @Test
-//    public void shouldDeleteShirt() {
-//
-//        // arrange
-//        TshirtViewModel toCompare = new TshirtViewModel();
-//        toCompare.setId(1);
-//        toCompare.setColor("blue");
-//        toCompare.setSize("large");
-//        toCompare.setDescription("large blue shirt");
-//        toCompare.setPrice(BigDecimal.valueOf(13.99));
-//        toCompare.setQuantity(2);
-//
-//        // act
-//        TshirtViewModel tshirtViewModel = service.findTShirt(1);
-//        service.deleteTShirt(1);
-//        assertFalse(service.findTShirt(1));
-//
-//    }
 
 }

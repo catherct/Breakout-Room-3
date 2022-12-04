@@ -21,7 +21,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class TshirtControllerRepositoryTest {
 
-    // to-do
     @Autowired
     TshirtRepository tshirtRepository;
 
