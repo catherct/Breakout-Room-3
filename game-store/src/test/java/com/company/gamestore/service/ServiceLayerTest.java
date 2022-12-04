@@ -14,6 +14,7 @@ import java.util.Optional;
 import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.junit.Assert.*;
 
 public class ServiceLayerTest {
 
@@ -193,5 +194,4 @@ public class ServiceLayerTest {
         assertFalse(sampleShirts.isEmpty());
 
     }
-
 }
