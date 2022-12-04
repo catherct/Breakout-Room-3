@@ -1,9 +1,6 @@
 package com.company.gamestore.service;
 
-import com.company.gamestore.model.Console;
-import com.company.gamestore.model.Game;
-import com.company.gamestore.model.Invoice;
-import com.company.gamestore.model.Tshirt;
+import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
 import com.company.gamestore.viewmodel.GameViewModel;
@@ -111,6 +108,8 @@ public class ServiceLayer {
         console.setQuantity(viewModel.getQuantity());
         console.setProcessor(viewModel.getProcessor());
         console.setMemory_amount(viewModel.getMemory_amount());
+        //Might cause issues later
+        console.setConsole_id(viewModel.getId());
         return console;
     }
 
@@ -123,6 +122,8 @@ public class ServiceLayer {
         game.setQuantity(viewModel.getQuantity());
         game.setStudio(viewModel.getStudio());
         game.setTitle(viewModel.getTitle());
+        //might be wrong will check again
+        game.setId(viewModel.getId());
         return game;
     }
 
@@ -135,6 +136,8 @@ public class ServiceLayer {
         tshirt.setQuantity(viewModel.getQuantity());
         tshirt.setSize(viewModel.getSize());
         tshirt.setPrice(viewModel.getPrice());
+        //might cause issues
+        tshirt.setId(viewModel.getId());
 
         return tshirt;
     }
@@ -154,6 +157,14 @@ public class ServiceLayer {
         invoice.setStreet(viewModel.getStreet());
         invoice.setZipcode(viewModel.getZipcode());
         invoice.setItemId(viewModel.getItemId());
+        //might cause issues as well
+
+        invoice.setId(viewModel.getId());
+        invoice.setProcessingFee(viewModel.getProcessingFee());
+        invoice.setTax(viewModel.getTax());
+        invoice.setUnitPrice(viewModel.getUnitPrice());
+        invoice.setSubtotal(viewModel.getSubtotal());
+        invoice.setTotal(viewModel.getTotal());
 
         return invoice;
     }
@@ -373,16 +384,16 @@ public class ServiceLayer {
     @Transactional
     public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
         Invoice invoice = buildInvoice(viewModel);
-        Optional<BigDecimal> processingFee = processingFeesRepo.findProcessingFeesByProduct(invoice.getItemType());
-        Optional<BigDecimal> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
+        Optional<ProcessingFee> processingFee = processingFeesRepo.findProcessingFeeByProductType(invoice.getItemType());
+        Optional<SalesTaxRate> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
 
         //throw an exception here
         if(invoice.getQuantity() < 0){
 
         }
         //check exceptions here to make sure the processing fee and sales tax are present first
-        invoice.setTax(salesTax.get());
-        invoice.setProcessingFee(processingFee.get());
+        invoice.setTax(salesTax.get().getRate());
+        invoice.setProcessingFee(processingFee.get().getFee());
 
 
         BigDecimal total = BigDecimal.ZERO;
@@ -433,11 +444,11 @@ public class ServiceLayer {
         invoice.setSubtotal(total);
 
         //will calculate the sales tax check to make an exception here
-        salesTax = Optional.of(salesTax.get().multiply(total));
-        total = total.add(salesTax.get());
+        BigDecimal saleTax = salesTax.get().getRate().multiply(total);
+        total = total.add(saleTax);
 
         //exception for processing fee here
-        total = total.add(processingFee.get());
+        total = total.add(processingFee.get().getFee());
 
         //checks to see if we should add on the over 10 processing fee
         if(invoice.getQuantity() > 10){
