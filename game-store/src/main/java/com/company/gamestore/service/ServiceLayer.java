@@ -151,6 +151,12 @@ public class ServiceLayer {
         invoice.setStreet(viewModel.getStreet());
         invoice.setZipcode(viewModel.getZipcode());
         invoice.setItemId(viewModel.getItemId());
+        invoice.setId(viewModel.getId());
+        invoice.setProcessingFee(viewModel.getProcessingFee());
+        invoice.setTax(viewModel.getTax());
+        invoice.setUnitPrice(viewModel.getUnitPrice());
+        invoice.setSubtotal(viewModel.getSubtotal());
+        invoice.setTotal(viewModel.getTotal());
 
         return invoice;
     }
@@ -367,8 +373,8 @@ public class ServiceLayer {
 
     //INVOICE API
 
-/*    @Transactional
-    public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
+    @Transactional
+    /*public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
         Invoice invoice = buildInvoice(viewModel);
         Optional<ProcessingFee> processingFee = processingFeesRepo.findProcessingFeesByProduct(invoice.getItemType());
         Optional<SalesTaxRate> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
@@ -430,7 +436,7 @@ public class ServiceLayer {
         invoice.setSubtotal(total);
 
         //will calculate the sales tax check to make an exception here
-        salesTax = Optional.of(salesTax.get().multiply(total));
+        //salesTax = Optional.of(salesTax.get().multiply(total));
         total = total.add(salesTax.get());
 
         //exception for processing fee here
@@ -454,8 +460,8 @@ public class ServiceLayer {
 
         return viewModel;
 
-    }*/
-
+    }
+*/
     public InvoiceViewModel findInvoice(Integer id){
         Optional<Invoice> invoice = invoiceRepo.findById(id);
 
