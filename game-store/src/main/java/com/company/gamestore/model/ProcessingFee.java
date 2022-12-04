@@ -28,8 +28,11 @@ public class ProcessingFee {
         return productType;
     }
 
-    public void setProductType(String product_type) {
-        this.productType = product_type;
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+
+
     }
 
     public BigDecimal getFee() {
