@@ -24,12 +24,14 @@ public class ProcessingFee {
     @Digits(integer=4, fraction=2)
     private BigDecimal fee;
 
-    public String getProduct_type() {
+
+    public String getProductType() {
         return productType;
     }
 
-    public void setProduct_type(String product_type) {
-        this.productType = product_type;
+    public void setProductType(String productType) {
+        this.productType = productType;
+
     }
 
     public BigDecimal getFee() {

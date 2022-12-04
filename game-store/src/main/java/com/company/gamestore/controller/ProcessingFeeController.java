@@ -13,15 +13,17 @@ import java.util.Optional;
 
 @RestController
 public class ProcessingFeeController {
-    @Autowired
-    ProcessingFeesRepository repo;
 
-    //Get processing fee by product
-    /*@GetMapping("/processing_fee/{product}")
-    @ResponseStatus(value = HttpStatus.OK)
-    public Optional<BigDecimal> getProcessingFeesByProduct (@PathVariable String product) {
+//    @Autowired
+//    ProcessingFeesRepository repo;
+//
+//    //Get processing fee by product
+//    @GetMapping("/processing_fee/{product}")
+//    @ResponseStatus(value = HttpStatus.OK)
+//    public Optional<BigDecimal> getProcessingFeesByProduct (@PathVariable String product) {
+//
+//        Optional<BigDecimal> returnVal = repo.findProcessingFeesByProductType (product);
+//        return repo.findProcessingFeesByProductType(product);
+//    }
 
-        Optional<BigDecimal> returnVal = repo.findProcessingFeesByProduct (product);
-        return repo.findProcessingFeesByProduct(product);
-    }*/
 }
