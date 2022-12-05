@@ -35,6 +35,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("92617");
         invoice.setItemType("Console");
         invoice.setItemId(1);
+        invoice.setUnitPrice(new BigDecimal("100.00"));
         invoice.setQuantity(1);
         invoice.setSubtotal(new BigDecimal("10.00"));
         invoice.setTax(new BigDecimal("0.80"));
@@ -64,6 +65,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("92617");
         invoice.setItemType("Console");
         invoice.setItemId(1);
+        invoice.setUnitPrice(new BigDecimal("100.00"));
         invoice.setQuantity(1);
         invoice.setSubtotal(new BigDecimal("10.00"));
         invoice.setTax(new BigDecimal("0.80"));
@@ -95,6 +97,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("92617");
         invoice.setItemType("Console");
         invoice.setItemId(1);
+        invoice.setUnitPrice(new BigDecimal("100.00"));
         invoice.setQuantity(1);
         invoice.setSubtotal(new BigDecimal("10.00"));
         invoice.setTax(new BigDecimal(".8"));
@@ -112,6 +115,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("93314");
         invoice.setItemType("Game");
         invoice.setItemId(32);
+        invoice.setUnitPrice(new BigDecimal("70.00"));
         invoice.setQuantity(4);
         invoice.setSubtotal(new BigDecimal("11.00"));
         invoice.setTax(new BigDecimal(".7"));
@@ -129,6 +133,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("93314");
         invoice.setItemType("Game");
         invoice.setItemId(30);
+        invoice.setUnitPrice(new BigDecimal("70.00"));
         invoice.setQuantity(2);
         invoice.setSubtotal(new BigDecimal("15.00"));
         invoice.setTax(new BigDecimal(".7"));
@@ -153,6 +158,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("92617");
         invoice.setItemType("Console");
         invoice.setItemId(1);
+        invoice.setUnitPrice(new BigDecimal("100.00"));
         invoice.setQuantity(1);
         invoice.setSubtotal(new BigDecimal("10.00"));
         invoice.setTax(new BigDecimal(".8"));
@@ -170,6 +176,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("93314");
         invoice.setItemType("Game");
         invoice.setItemId(32);
+        invoice.setUnitPrice(new BigDecimal("70.00"));
         invoice.setQuantity(4);
         invoice.setSubtotal(new BigDecimal("11.00"));
         invoice.setTax(new BigDecimal("0.70"));
@@ -187,6 +194,7 @@ public class InvoiceRepositoryTest {
         invoice.setZipcode("93314");
         invoice.setItemType("Game");
         invoice.setItemId(30);
+        invoice.setUnitPrice(new BigDecimal("70.00"));
         invoice.setQuantity(2);
         invoice.setSubtotal(new BigDecimal("15.00"));
         invoice.setTax(new BigDecimal("0.70"));
