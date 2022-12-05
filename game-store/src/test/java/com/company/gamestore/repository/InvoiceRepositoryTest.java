@@ -96,10 +96,10 @@ public class InvoiceRepositoryTest {
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal(10.00));
-        invoice.setTax(new BigDecimal(.8));
-        invoice.setProcessingFee(new BigDecimal(1.25));
-        invoice.setTotal(new BigDecimal(15.00));
+        invoice.setSubtotal(new BigDecimal("10.00"));
+        invoice.setTax(new BigDecimal(".8"));
+        invoice.setProcessingFee(new BigDecimal("1.25"));
+        invoice.setTotal(new BigDecimal("15.00"));
 
         // Add 1
         invoice = invoiceRepository.save(invoice);
@@ -113,10 +113,10 @@ public class InvoiceRepositoryTest {
         invoice.setItemType("Game");
         invoice.setItemId(32);
         invoice.setQuantity(4);
-        invoice.setSubtotal(new BigDecimal(11.00));
-        invoice.setTax(new BigDecimal(.7));
-        invoice.setProcessingFee(new BigDecimal(1.30));
-        invoice.setTotal(new BigDecimal(10.00));
+        invoice.setSubtotal(new BigDecimal("11.00"));
+        invoice.setTax(new BigDecimal(".7"));
+        invoice.setProcessingFee(new BigDecimal("1.30"));
+        invoice.setTotal(new BigDecimal("10.00"));
 
         // Add 2
         invoice = invoiceRepository.save(invoice);
@@ -130,10 +130,10 @@ public class InvoiceRepositoryTest {
         invoice.setItemType("Game");
         invoice.setItemId(30);
         invoice.setQuantity(2);
-        invoice.setSubtotal(new BigDecimal(15.00));
-        invoice.setTax(new BigDecimal(.7));
-        invoice.setProcessingFee(new BigDecimal(1.30));
-        invoice.setTotal(new BigDecimal(10.00));
+        invoice.setSubtotal(new BigDecimal("15.00"));
+        invoice.setTax(new BigDecimal(".7"));
+        invoice.setProcessingFee(new BigDecimal("1.30"));
+        invoice.setTotal(new BigDecimal("10.00"));
 
         // Add 3
         invoice = invoiceRepository.save(invoice);
@@ -154,10 +154,10 @@ public class InvoiceRepositoryTest {
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal(10.00));
-        invoice.setTax(new BigDecimal(.8));
-        invoice.setProcessingFee(new BigDecimal(1.25));
-        invoice.setTotal(new BigDecimal(15.00));
+        invoice.setSubtotal(new BigDecimal("10.00"));
+        invoice.setTax(new BigDecimal(".8"));
+        invoice.setProcessingFee(new BigDecimal("1.25"));
+        invoice.setTotal(new BigDecimal("15.00"));
 
         // Add 1
         invoice = invoiceRepository.save(invoice);

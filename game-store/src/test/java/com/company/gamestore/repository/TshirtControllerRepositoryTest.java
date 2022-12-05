@@ -42,7 +42,7 @@ public class TshirtControllerRepositoryTest {
         shirt.setQuantity(2);
 
         // act
-        tshirtRepository.save(shirt);
+        shirt = tshirtRepository.save(shirt);
 
         // assert
         Optional<Tshirt> shirt1 = tshirtRepository.findById(shirt.getId());
@@ -64,7 +64,7 @@ public class TshirtControllerRepositoryTest {
         shirt.setQuantity(2);
 
         // act
-        tshirtRepository.save(shirt);
+        shirt =tshirtRepository.save(shirt);
 
         // assert
         Optional<Tshirt> shirt1 = tshirtRepository.findById(shirt.getId());
@@ -180,7 +180,7 @@ public class TshirtControllerRepositoryTest {
         shirt.setQuantity(2);
 
         // act
-        tshirtRepository.save(shirt);
+        shirt = tshirtRepository.save(shirt);
 
         // assert
         Optional<Tshirt> shirt1 = tshirtRepository.findById(shirt.getId());
@@ -190,7 +190,7 @@ public class TshirtControllerRepositoryTest {
         shirt.setQuantity(4);
 
         // act
-        tshirtRepository.save(shirt);
+        shirt = tshirtRepository.save(shirt);
 
         // assert
         Optional<Tshirt> shirt2 = tshirtRepository.findById(shirt.getId());
@@ -213,7 +213,7 @@ public class TshirtControllerRepositoryTest {
         shirt.setQuantity(2);
 
         // act
-        tshirtRepository.save(shirt);
+        shirt = tshirtRepository.save(shirt);
 
         // assert
         Optional<Tshirt> shirt1 = tshirtRepository.findById(shirt.getId());
