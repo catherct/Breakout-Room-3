@@ -2,6 +2,8 @@ package com.company.gamestore.controller;
 
 import com.company.gamestore.model.Console;
 import com.company.gamestore.repository.ConsoleControllerRepository;
+import com.company.gamestore.service.ServiceLayer;
+import com.company.gamestore.viewmodel.ConsoleViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,52 +13,46 @@ import java.util.Optional;
 @RestController
 public class ConsoleController {
     @Autowired
-    ConsoleControllerRepository repo;
+    private ServiceLayer serviceLayer;
 
     //Get all Consoles
     @GetMapping("/console")
-    public List<Console> getConsoles() {
-        return repo.findAll();
+    @ResponseStatus(HttpStatus.OK)
+    public List<ConsoleViewModel> getConsoles() {
+        return serviceLayer.findAllConsoles();
     }
 
     //Get Console by id
     @GetMapping("/console/{id}")
-    public Console getConsoleById(@PathVariable int id) {
-
-        Optional<Console> returnVal = repo.findById(id);
-        if (returnVal.isPresent()) {
-            return returnVal.get();
-        } else {
-            return null;
-        }
+    @ResponseStatus(HttpStatus.OK)
+    public ConsoleViewModel getConsoleById(@PathVariable Integer id){
+        return serviceLayer.findConsole(id);
     }
     //    Get Console by manufacturer
     @GetMapping("/console/manufacturer/{manufacturer}")
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Console> getConsoleByManufacturer(@PathVariable String manufacturer) {
-
-        List<Console> returnVal = repo.findConsoleByManufacturer(manufacturer);
-        return repo.findConsoleByManufacturer(manufacturer);
+    public List<ConsoleViewModel> getConsoleByManufacturer(@PathVariable String manufacturer) {
+        return serviceLayer.findConsoleByManufacturer(manufacturer);
     }
 
     //Create Console
     @PostMapping("/console")
     @ResponseStatus(HttpStatus.CREATED)
-    public Console addConsole(@RequestBody Console sample_console) {
-        return repo.save(sample_console);
+    public ConsoleViewModel addConsole(@RequestBody ConsoleViewModel sample_console) {
+        return serviceLayer.saveConsole(sample_console);
     }
 
     //update Console
     @PutMapping("/console")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateConsole(@RequestBody Console sample_console) {
-        repo.save(sample_console);
+    public void updateConsole(@RequestBody ConsoleViewModel sample_console) {
+        serviceLayer.saveConsole(sample_console);
     }
 
     //delete Console
     @DeleteMapping("/console/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteConsole(@PathVariable int id) {
-        repo.deleteById(id);
+        serviceLayer.removeConsole(id);
     }
 }
