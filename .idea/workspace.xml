@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a92fc17-1d14-43f7-abac-9d2cca4f9cc1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/game-store/src/test/java/com/company/gamestore/GameControllerStoreApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-store/src/test/java/com/company/gamestore/GameControllerStoreApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game-store/src/test/java/com/company/gamestore/service/ServiceLayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-store/src/test/java/com/company/gamestore/service/ServiceLayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-store/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game-store/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,24 +39,11 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/nyahello/Documents/Adv_Java/Breakout-Room-3",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.26367188",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "spring.configuration.checksum": "098e63971dc794265cc5afb2ec67b436"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
   <component name="RunManager" selected="JUnit.ServiceLayerTest.shouldSaveConsole">
     <configuration name="ServiceLayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="game-store" />
