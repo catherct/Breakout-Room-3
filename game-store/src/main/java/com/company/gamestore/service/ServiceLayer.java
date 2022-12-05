@@ -1,9 +1,6 @@
 package com.company.gamestore.service;
 
-import com.company.gamestore.model.Console;
-import com.company.gamestore.model.Game;
-import com.company.gamestore.model.Invoice;
-import com.company.gamestore.model.Tshirt;
+import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
 import com.company.gamestore.viewmodel.GameViewModel;
@@ -111,6 +108,10 @@ public class ServiceLayer {
         console.setQuantity(viewModel.getQuantity());
         console.setProcessor(viewModel.getProcessor());
         console.setMemory_amount(viewModel.getMemory_amount());
+
+        //Might cause issues later
+
+        console.setConsole_id(viewModel.getId());
         return console;
     }
 
@@ -123,6 +124,8 @@ public class ServiceLayer {
         game.setQuantity(viewModel.getQuantity());
         game.setStudio(viewModel.getStudio());
         game.setTitle(viewModel.getTitle());
+        //might be wrong will check again
+        game.setId(viewModel.getId());
         return game;
     }
 
@@ -135,6 +138,8 @@ public class ServiceLayer {
         tshirt.setQuantity(viewModel.getQuantity());
         tshirt.setSize(viewModel.getSize());
         tshirt.setPrice(viewModel.getPrice());
+        //might cause issues
+        tshirt.setId(viewModel.getId());
 
         return tshirt;
     }
@@ -155,9 +160,28 @@ public class ServiceLayer {
         invoice.setZipcode(viewModel.getZipcode());
         invoice.setItemId(viewModel.getItemId());
 
+        //might cause issues as well
+
+
+        invoice.setId(viewModel.getId());
+        invoice.setProcessingFee(viewModel.getProcessingFee());
+        invoice.setTax(viewModel.getTax());
+        invoice.setUnitPrice(viewModel.getUnitPrice());
+        invoice.setSubtotal(viewModel.getSubtotal());
+        invoice.setTotal(viewModel.getTotal());
+
         return invoice;
     }
     //Console Api
+
+//    @Transactional
+//    public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
+//        Console console = buildConsole(viewModel);
+//
+//        console =  consoleRepo.save(console);
+//        viewModel.setId(console.getConsole_id());
+//        return viewModel;
+//    }
 
     @Transactional
     public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
@@ -370,94 +394,107 @@ public class ServiceLayer {
 
     //INVOICE API
 
-//    @Transactional
-//    public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
-//        Invoice invoice = buildInvoice(viewModel);
-//        Optional<BigDecimal> processingFee = processingFeesRepo.findProcessingFeesByProductType(invoice.getItemType());
-//        Optional<BigDecimal> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
-//
-//        //throw an exception here
-//        if(invoice.getQuantity() < 0){
-//
-//        }
-//        //check exceptions here to make sure the processing fee and sales tax are present first
-//        invoice.setTax(salesTax.get());
-//        invoice.setProcessingFee(processingFee.get());
-//
-//
-//        BigDecimal total = BigDecimal.ZERO;
-//        BigDecimal unitPrice = BigDecimal.ZERO;
-//
-//        //we go and check to see what item the invoice has
-//        if(invoice.getItemType().equals("Game")){
-//            Optional<Game> game = gameRepo.findById(invoice.getItemId());
-//            unitPrice = game.isPresent() ? game.get().getPrice(): null;
-//
-//            //throw an error here requested quantity cannot be greater than what we have
-//            if(invoice.getQuantity() > game.get().getQuantity()){
-//
-//            }
-//        }
-//        else if(invoice.getItemType().equals("T-Shirt")){
-//                Optional<Tshirt> tshirt = tshirtRepo.findById(invoice.getItemId());
-//                unitPrice = tshirt.isPresent() ? tshirt.get().getPrice(): null;
-//
-//            //throw an error here requested quantity cannot be greater than what we have
-//            if(invoice.getQuantity() > tshirt.get().getQuantity()){
-//
-//            }
-//        }
-//        else if(invoice.getItemType().equals("Console")){
-//                Optional<Console> console = consoleRepo.findById(invoice.getItemId());
-//                unitPrice = console.isPresent() ? console.get().getPrice(): null;
-//
-//            //throw an error here requested quantity cannot be greater than what we have
-//            if(invoice.getQuantity() > console.get().getQuantity()){
-//
-//            }
-//        }
-//        //throw an error here if the type is none of these
-//
-//
-//        //throw another error here
-//        if (unitPrice == null){
-//
-//        }
-//        invoice.setUnitPrice(unitPrice);
-//
-//
-//        //gets the subtotal by multiplying the unitprice by the quantity amount
-//        total = total.add(unitPrice.multiply(BigDecimal.valueOf(invoice.getQuantity())));
-//
-//        //subtotal is the total before the sales tax and processing fee
-//        invoice.setSubtotal(total);
-//
-//        //will calculate the sales tax check to make an exception here
-//        salesTax = Optional.of(salesTax.get().multiply(total));
-//        total = total.add(salesTax.get());
-//
-//        //exception for processing fee here
-//        total = total.add(processingFee.get());
-//
-//        //checks to see if we should add on the over 10 processing fee
-//        if(invoice.getQuantity() > 10){
-//            total = total.add(BigDecimal.valueOf(15.49));
-//        }
-//
-//        //sets the total
-//        invoice.setTotal(total);
-//
-//        invoice = invoiceRepo.save(invoice);
-//        viewModel.setTotal(invoice.getTotal());
-//        viewModel.setProcessingFee(invoice.getProcessingFee());
-//        viewModel.setTax(invoice.getTax());
-//        viewModel.setUnitPrice(invoice.getUnitPrice());
-//        viewModel.setSubtotal(invoice.getSubtotal());
-//        viewModel.setId(invoice.getId());
-//
-//        return viewModel;
-//
-//    }
+
+    @Transactional
+    public InvoiceViewModel saveInvoice(InvoiceViewModel viewModel){
+        Invoice invoice = buildInvoice(viewModel);
+        Optional<ProcessingFee> processingFee = processingFeesRepo.findProcessingFeesByProductType(invoice.getItemType());
+        Optional<SalesTaxRate> salesTax = salesTaxRateRepo.findSalesTaxRateByState(invoice.getState());
+
+        //throw an exception here
+        if(invoice.getQuantity() < 0){
+            throw  new IllegalArgumentException("The Quantity cannot be 0");
+        }
+        //check exceptions here to make sure the processing fee and sales tax are present first
+
+        if(!salesTax.isPresent()){
+            throw new IllegalArgumentException("That State does not exists");
+        }
+        invoice.setTax(salesTax.get().getRate());
+
+        if(!processingFee.isPresent()){
+            throw new IllegalArgumentException("That item type does not exist.");
+        }
+        invoice.setProcessingFee(processingFee.get().getFee());
+
+
+        BigDecimal total = BigDecimal.ZERO;
+        BigDecimal unitPrice = BigDecimal.ZERO;
+
+        //we go and check to see what item the invoice has
+        if(invoice.getItemType().equals("Game")){
+            Optional<Game> game = gameRepo.findById(invoice.getItemId());
+            unitPrice = game.isPresent() ? game.get().getPrice(): null;
+
+            //throw an error here requested quantity cannot be greater than what we have
+            if(invoice.getQuantity() > game.get().getQuantity()){
+                throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
+            }
+        }
+        else if(invoice.getItemType().equals("T-Shirt")){
+                Optional<Tshirt> tshirt = tshirtRepo.findById(invoice.getItemId());
+                unitPrice = tshirt.isPresent() ? tshirt.get().getPrice(): null;
+
+            //throw an error here requested quantity cannot be greater than what we have
+            if(invoice.getQuantity() > tshirt.get().getQuantity()){
+                throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
+            }
+        }
+        else if(invoice.getItemType().equals("Console")){
+                Optional<Console> console = consoleRepo.findById(invoice.getItemId());
+                unitPrice = console.isPresent() ? console.get().getPrice(): null;
+
+            //throw an error here requested quantity cannot be greater than what we have
+            if(invoice.getQuantity() > console.get().getQuantity()){
+                throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
+            }
+        }
+        else {
+            throw new IllegalArgumentException("That item is not in the inventory");
+
+        }
+        //throw an error here if the type is none of these
+
+
+        //throw another error here
+        if (unitPrice == null){
+            throw new IllegalArgumentException("The item price could not be found");
+        }
+        invoice.setUnitPrice(unitPrice);
+
+
+        //gets the subtotal by multiplying the unitprice by the quantity amount
+        total = total.add(unitPrice.multiply(BigDecimal.valueOf(invoice.getQuantity())));
+
+        //subtotal is the total before the sales tax and processing fee
+        invoice.setSubtotal(total);
+
+        //will calculate the sales tax check to make an exception here
+        BigDecimal saleTax = salesTax.get().getRate().multiply(total);
+        total = total.add(saleTax);
+
+        total = total.add(processingFee.get().getFee());
+
+        //checks to see if we should add on the over 10 processing fee
+        if(invoice.getQuantity() > 10){
+            total = total.add(BigDecimal.valueOf(15.49));
+        }
+
+        //sets the total
+        invoice.setTotal(total);
+
+        invoice = invoiceRepo.save(invoice);
+        viewModel.setTotal(invoice.getTotal());
+        viewModel.setProcessingFee(invoice.getProcessingFee());
+        viewModel.setTax(invoice.getTax());
+        viewModel.setUnitPrice(invoice.getUnitPrice());
+        viewModel.setSubtotal(invoice.getSubtotal());
+        viewModel.setId(invoice.getId());
+
+        return viewModel;
+
+    }
+
 
     public InvoiceViewModel findInvoice(Integer id){
         Optional<Invoice> invoice = invoiceRepo.findById(id);

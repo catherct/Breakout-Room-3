@@ -13,12 +13,14 @@ public class InvoiceController {
     @Autowired
     private ServiceLayer serviceLayer;
 
-//    // Create a new invoice.
-//    @PostMapping("/invoice")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public InvoiceViewModel addInvoice(@RequestBody InvoiceViewModel invoice) {
-//        return serviceLayer.saveInvoice(invoice);
-//    }
+    // Create a new invoice.
+
+    @PostMapping("/invoice")
+    @ResponseStatus(HttpStatus.CREATED)
+    public InvoiceViewModel addInvoice(@RequestBody InvoiceViewModel invoice) {
+        return serviceLayer.saveInvoice(invoice);
+    }
+
 
     // Find invoice by id.
     @GetMapping("/invoice/{id}")
@@ -27,7 +29,7 @@ public class InvoiceController {
         // Handle IVM not found
         InvoiceViewModel foundIvm = serviceLayer.findInvoice(id);
         if (foundIvm == null) {
-            throw new IllegalArgumentException("Invoice Error: Non-existent invoice.");
+            throw new NullPointerException("Invoice Error: Non-existent invoice.");
         }
         return foundIvm;
     }

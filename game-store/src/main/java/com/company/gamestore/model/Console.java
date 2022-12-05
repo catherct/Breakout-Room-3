@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -17,32 +18,32 @@ public class Console implements Serializable {
     @Id
     @Column(name = "console_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int console_id;
+    private Integer console_id;
 
-    @NotNull
+    @NotNull(message = "You must enter a model")
     @Size(max=50)
     private String model;
-    @NotNull
+    @NotNull(message = "You must enter a manufacturer")
     @Size(max=50)
     private String manufacturer;
-    @NotNull
+    @NotNull(message = "You must enter a memory amount")
     @Size(max = 20)
     private String memory_amount;
-    @NotNull
+    @NotNull(message = "You must enter a processor ")
     @Size(max=20)
     private String processor;
-    @NotNull
+    @NotNull(message = "You must enter a price")
     @Digits(integer=5, fraction=2)
     private BigDecimal price;
-    @NotNull
-    @Size(min = 0)
+//    @Size(min = 0)
+    @NotNull(message = "You must enter a quantity")
     private int quantity;
 
-    public int getConsole_id() {
+    public Integer getConsole_id() {
         return console_id;
     }
 
-    public void setConsole_id(int console_id) {
+    public void setConsole_id(Integer console_id) {
         this.console_id = console_id;
     }
 

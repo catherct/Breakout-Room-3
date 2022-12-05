@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -19,20 +20,20 @@ public class Tshirt implements Serializable {
     @Column(name = "t_shirt_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotEmpty(message = "You must enter a t-shirt size.")
+    @NotNull(message = "You must enter a t-shirt size.")
     @Size(min = 1, max = 20, message = "Error: Size cannot exceed 20 characters.")
     private String size;
-    @NotEmpty(message = "You must enter a color.")
+    @NotNull(message = "You must enter a color.")
     @Size(min = 1, max = 20, message = "Error: Color cannot exceed 20 characters.")
     private String color;
-    @NotEmpty(message = "You must enter a description.")
+    @NotNull(message = "You must enter a description.")
     @Size(min = 10, max = 255, message = "Error: Description cannot exceed 255 characters.")
     private String description;
     @Digits(integer = 5, fraction = 2)
-    @NotEmpty(message = "You must enter a price.")
+    @NotNull(message = "You must enter a price.")
     private BigDecimal price;
-    @NotEmpty(message = "You must enter a quantity.")
-    private int quantity;
+    @NotNull(message = "You must enter a quantity.")
+    private Integer quantity;
 
     public Integer getId() {
         return id;
@@ -74,11 +75,11 @@ public class Tshirt implements Serializable {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
