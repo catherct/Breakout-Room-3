@@ -5,24 +5,24 @@ version: 2.1
 # Define a job to be invoked later in a workflow
 jobs:
   # Below is the def of your job to build and test your app
-build-and-test:
-  working_directory: ~/Breakout-Room-3/game-store
+  build-and-test:
+    working_directory: ~/Breakout-Room-3/game-store
 
-  docker:
-    - image: cimg/openjdk:8.0
+    docker:
+      - image: cimg/openjdk:8.0
 
-  steps:
-    # Checkout the code as the first step
-    - checkout:
-        path: ~/Breakout-Room-3
-    # Use mvn clean and package as the standard maven build phase
-    - run:
-        name: Build
-        command: mvn -B -DskipTests clean package
-    # Then run your tests
-    - run:
-        name: Test
-        command: mvn test
+    steps:
+      # Checkout the code as the first step
+      - checkout:
+          path: ~/Breakout-Room-3
+      # Use mvn clean and package as the standard maven build phase
+      - run:
+          name: Build
+          command: mvn -B -DskipTests clean package
+      # Then run your tests
+      - run:
+          name: Test
+          command: mvn test
 workflows:
   sample:
     jobs:
