@@ -43,21 +43,22 @@ public class Invoice implements Serializable {
     @Column(name = "item_id")
     private Integer itemId;
 
-    @NotNull(message = "You must enter a unit price ")
-    @Digits(integer = 5, fraction = 2)
-    private BigDecimal unitPrice;
     @NotNull(message = "You must enter a quantity")
     private Integer quantity;
-    @NotNull(message = "You must enter a subtotal")
+
+    /*@NotNull(message = "You must enter a unit price ")*/
+    @Digits(integer = 5, fraction = 2)
+    private BigDecimal unitPrice;
+    /*@NotNull(message = "You must enter a subtotal")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal subtotal;
-    @NotNull(message = "You must enter a tax")
+    /*@NotNull(message = "You must enter a tax")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal tax;
-    @NotNull(message = "You must enter a processing fee")
+    /*@NotNull(message = "You must enter a processing fee")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal processingFee;
-    @NotNull(message = "You must enter a total")
+    /*@NotNull(message = "You must enter a total")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal total;
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -479,6 +480,9 @@ public class ServiceLayer {
         if(invoice.getQuantity() > 10){
             total = total.add(BigDecimal.valueOf(15.49));
         }
+
+        // Set total to two decimal points
+        total = total.setScale(2, RoundingMode.FLOOR);
 
         //sets the total
         invoice.setTotal(total);
