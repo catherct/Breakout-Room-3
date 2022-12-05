@@ -26,7 +26,11 @@ public class ConsoleController {
     @GetMapping("/console/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ConsoleViewModel getConsoleById(@PathVariable Integer id){
-        return serviceLayer.findConsole(id);
+       ConsoleViewModel consoleViewModel =  serviceLayer.findConsole(id);
+       if(consoleViewModel == null){
+           throw new NullPointerException("Error: That Console does not exist");
+       }
+       return consoleViewModel;
     }
     //    Get Console by manufacturer
     @GetMapping("/console/manufacturer/{manufacturer}")

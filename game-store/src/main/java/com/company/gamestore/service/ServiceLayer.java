@@ -403,10 +403,18 @@ public class ServiceLayer {
 
         //throw an exception here
         if(invoice.getQuantity() < 0){
-
+            throw  new IllegalArgumentException("The Quantity cannot be 0");
         }
         //check exceptions here to make sure the processing fee and sales tax are present first
+
+        if(!salesTax.isPresent()){
+            throw new IllegalArgumentException("That State does not exists");
+        }
         invoice.setTax(salesTax.get().getRate());
+
+        if(!processingFee.isPresent()){
+            throw new IllegalArgumentException("That item type does not exist.");
+        }
         invoice.setProcessingFee(processingFee.get().getFee());
 
 
@@ -420,7 +428,7 @@ public class ServiceLayer {
 
             //throw an error here requested quantity cannot be greater than what we have
             if(invoice.getQuantity() > game.get().getQuantity()){
-
+                throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
             }
         }
         else if(invoice.getItemType().equals("T-Shirt")){
@@ -429,7 +437,7 @@ public class ServiceLayer {
 
             //throw an error here requested quantity cannot be greater than what we have
             if(invoice.getQuantity() > tshirt.get().getQuantity()){
-
+                throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
             }
         }
         else if(invoice.getItemType().equals("Console")){
@@ -438,15 +446,19 @@ public class ServiceLayer {
 
             //throw an error here requested quantity cannot be greater than what we have
             if(invoice.getQuantity() > console.get().getQuantity()){
-
+                throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
             }
+        }
+        else {
+            throw new IllegalArgumentException("That item is not in the inventory");
+
         }
         //throw an error here if the type is none of these
 
 
         //throw another error here
         if (unitPrice == null){
-
+            throw new IllegalArgumentException("The item price could not be found");
         }
         invoice.setUnitPrice(unitPrice);
 
@@ -461,7 +473,6 @@ public class ServiceLayer {
         BigDecimal saleTax = salesTax.get().getRate().multiply(total);
         total = total.add(saleTax);
 
-        //exception for processing fee here
         total = total.add(processingFee.get().getFee());
 
         //checks to see if we should add on the over 10 processing fee
