@@ -225,7 +225,7 @@ public class ServiceLayerTest {
         invoice.setSubtotal(new BigDecimal("406.99"));
         invoice.setTax(new BigDecimal("0.06"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
-        invoice.setTotal(new BigDecimal("446.3994"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         Invoice invoice2 = new Invoice();
         invoice2.setId(2);
@@ -293,7 +293,7 @@ public class ServiceLayerTest {
         invoice.setSubtotal(new BigDecimal("406.99"));
         invoice.setTax(new BigDecimal("0.06"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
-        invoice.setTotal(new BigDecimal("446.3994"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         InvoiceViewModel recieved = service.saveInvoice(invoice);
         assertEquals(invoice, recieved);
@@ -319,7 +319,7 @@ public class ServiceLayerTest {
         invoice.setSubtotal(new BigDecimal("406.99"));
         invoice.setTax(new BigDecimal("0.06"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
-        invoice.setTotal(new BigDecimal("446.3994"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         InvoiceViewModel invoiceViewModel = service.findInvoice(1);
         assertEquals(invoiceViewModel, invoice);
@@ -341,7 +341,7 @@ public class ServiceLayerTest {
         invoice.setSubtotal(new BigDecimal("406.99"));
         invoice.setTax(new BigDecimal("0.06"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
-        invoice.setTotal(new BigDecimal("446.3994"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
 
         InvoiceViewModel invoice2 = new InvoiceViewModel();

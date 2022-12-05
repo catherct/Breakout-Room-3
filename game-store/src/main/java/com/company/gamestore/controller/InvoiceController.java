@@ -38,7 +38,7 @@ public class InvoiceController {
     @GetMapping("/invoice/name/{name}")
     @ResponseStatus(HttpStatus.OK)
     public List<InvoiceViewModel> getInvoiceByName(@PathVariable String name) {
-        // TODO: Comes back empty if no invoice found by name. Should we throw error?
+        // Comes back empty if no invoice found by name.
         return serviceLayer.findInvoicesByName(name);
     }
 
@@ -54,9 +54,10 @@ public class InvoiceController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateInvoice(@RequestBody InvoiceViewModel invoice) {
         // Handle IVM not found. Handled by check inside getInvoiceById method.
-        InvoiceViewModel ivmToUpdate = getInvoiceById(invoice.getId());
+        // Method call will fail if not found.
+        getInvoiceById(invoice.getId());
         // Updated if found.
-        serviceLayer.updateInvoice(ivmToUpdate);
+        serviceLayer.updateInvoice(invoice);
     }
 
     // Delete an existing invoice.
