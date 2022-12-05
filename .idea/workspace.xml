@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a92fc17-1d14-43f7-abac-9d2cca4f9cc1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/game-store/src/main/resources/application-production.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game-store/src/test/resources/application-production.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game-store/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/game-store/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game-store/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/game-store/src/test/resources/application.properties" afterDir="false" />
@@ -43,7 +45,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/game-store/src/main/resources" />
   </component>
   <component name="RunManager" selected="JUnit.ServiceLayerTest.shouldSaveConsole">
     <configuration name="ServiceLayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
