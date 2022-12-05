@@ -18,32 +18,32 @@ public class Console implements Serializable {
     @Id
     @Column(name = "console_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int console_id;
+    private Integer console_id;
 
-    @NotEmpty(message = "You must enter a model")
+    @NotNull(message = "You must enter a model")
     @Size(max=50)
     private String model;
-    @NotEmpty(message = "You must enter a manufacturer")
+    @NotNull(message = "You must enter a manufacturer")
     @Size(max=50)
     private String manufacturer;
-    @NotEmpty(message = "You must enter a memory amount")
+    @NotNull(message = "You must enter a memory amount")
     @Size(max = 20)
     private String memory_amount;
-    @NotEmpty(message = "You must enter a processor ")
+    @NotNull(message = "You must enter a processor ")
     @Size(max=20)
     private String processor;
-    @NotEmpty(message = "You must enter a price")
+    @NotNull(message = "You must enter a price")
     @Digits(integer=5, fraction=2)
     private BigDecimal price;
 //    @Size(min = 0)
-    @NotEmpty(message = "You must enter a quantity")
+    @NotNull(message = "You must enter a quantity")
     private int quantity;
 
-    public int getConsole_id() {
+    public Integer getConsole_id() {
         return console_id;
     }
 
-    public void setConsole_id(int console_id) {
+    public void setConsole_id(Integer console_id) {
         this.console_id = console_id;
     }
 
