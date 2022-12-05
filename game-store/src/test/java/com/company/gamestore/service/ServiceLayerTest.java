@@ -80,7 +80,7 @@ public class ServiceLayerTest {
 
         // act
         newShirt = service.saveTShirt(newShirt);
-        assertFalse(sampleShirts.isEmpty());    
+        assertFalse(sampleShirts.isEmpty());
 
     }
 
