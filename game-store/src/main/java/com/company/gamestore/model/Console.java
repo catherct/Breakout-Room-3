@@ -20,22 +20,23 @@ public class Console implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int console_id;
 
-    @NotEmpty
+    @NotEmpty(message = "You must enter a model")
     @Size(max=50)
     private String model;
-    @NotEmpty
+    @NotEmpty(message = "You must enter a manufacturer")
     @Size(max=50)
     private String manufacturer;
-    @NotEmpty
+    @NotEmpty(message = "You must enter a memory amount")
     @Size(max = 20)
     private String memory_amount;
-    @NotEmpty
+    @NotEmpty(message = "You must enter a processor ")
     @Size(max=20)
     private String processor;
-
+    @NotEmpty(message = "You must enter a price")
     @Digits(integer=5, fraction=2)
     private BigDecimal price;
 //    @Size(min = 0)
+    @NotEmpty(message = "You must enter a quantity")
     private int quantity;
 
     public int getConsole_id() {

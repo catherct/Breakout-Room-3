@@ -1,14 +1,12 @@
 package com.company.gamestore.service;
 
 
-import com.company.gamestore.model.Game;
+import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.GameViewModel;
 
-import com.company.gamestore.model.Console;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
-import com.company.gamestore.model.Invoice;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.InvoiceViewModel;
 import org.junit.Assert;
@@ -19,7 +17,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import com.company.gamestore.model.Tshirt;
+
 import com.company.gamestore.viewmodel.TshirtViewModel;
 import com.company.gamestore.viewmodel.InvoiceViewModel;
 import static junit.framework.TestCase.*;
@@ -44,6 +42,8 @@ public class ServiceLayerTest {
         setUpConsoleRepositoryMock();
         setUpInvoiceRepositoryMock();
         setupTshirtRepositoryMock();
+        setUpProcessingFeeMock();
+        setUpSalesTaxMock();
         service = new ServiceLayer(consoleRepo, gameRepo, invoiceRepo, processingRepo, taxRepo, shirtRepo);
 
     }
@@ -71,7 +71,7 @@ public class ServiceLayerTest {
         List<Tshirt> shirtList = new ArrayList<>();
         shirtList.add(shirt1);
 
-        doReturn(shirt1).when(shirtRepo).save(shirt2);
+        doReturn(shirt1).when(shirtRepo).save(shirt1);
         doReturn(Optional.of(shirt1)).when(shirtRepo).findById(1);
         doReturn(shirtList).when(shirtRepo).findAll();
 
@@ -221,10 +221,11 @@ public class ServiceLayerTest {
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal(10.00));
-        invoice.setTax(new BigDecimal(.8));
-        invoice.setProcessingFee(new BigDecimal(1.25));
-        invoice.setTotal(new BigDecimal(15.00));
+        invoice.setUnitPrice(new BigDecimal("406.99"));
+        invoice.setSubtotal(new BigDecimal("406.99"));
+        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.3994"));
 
         Invoice invoice2 = new Invoice();
         invoice2.setId(2);
@@ -248,36 +249,54 @@ public class ServiceLayerTest {
         List<Invoice> invoiceList = new ArrayList<>();
         invoiceList.add(invoice2);
 
-        doReturn(invoice).when(invoiceRepo).save(invoice2);
+        doReturn(invoice).when(invoiceRepo).save(invoice);
         doReturn(Optional.of(invoice)).when(invoiceRepo).findById(1);
         doReturn(iList).when(invoiceRepo).findAll();
         doReturn(invoiceList).when(invoiceRepo).findByName("Joe Doe");
+    }
+
+    private void setUpSalesTaxMock(){
+        taxRepo = mock(SalesTaxRateRepository.class);
+        //ca .06
+        SalesTaxRate taxRate = new SalesTaxRate();
+        taxRate.setState("CA");
+        taxRate.setRate(new BigDecimal(".06"));
+
+        doReturn(Optional.of(taxRate)).when(taxRepo).findSalesTaxRateByState("CA");
+    }
+
+    private void setUpProcessingFeeMock(){
+        processingRepo = mock(ProcessingFeesRepository.class);
+        ProcessingFee processingFee = new ProcessingFee();
+        processingFee.setProductType("Console");
+        processingFee.setFee(new BigDecimal("14.99"));
+
+        doReturn(Optional.of(processingFee)).when(processingRepo).findProcessingFeesByProductType("Console");
+
     }
 
     @Test
     public void shouldSaveInvoice() {
         // TODO fix this function
         // Arrange
-        InvoiceViewModel expectedResult = new InvoiceViewModel();
-        expectedResult.setId(2);
-        expectedResult.setName("Susan Lady");
-        expectedResult.setStreet("1 Pine Dr.");
-        expectedResult.setCity("Shafter");
-        expectedResult.setState("CA");
-        expectedResult.setZipcode("93262");
-        expectedResult.setItemType("Console");
-        expectedResult.setItemId(1);
-        expectedResult.setQuantity(1);
-
         InvoiceViewModel invoice = new InvoiceViewModel();
-        invoice.setName("Susan Lady");
-        invoice.setStreet("1 Pine Dr.");
-        invoice.setCity("Shafter");
+        invoice.setId(1);
+        invoice.setName("Jose Salgado");
+        invoice.setStreet("1 Irvine Ln.");
+        invoice.setCity("Irvine");
         invoice.setState("CA");
-        invoice.setZipcode("93262");
+        invoice.setZipcode("92617");
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
+        invoice.setUnitPrice(new BigDecimal("406.99"));
+        invoice.setSubtotal(new BigDecimal("406.99"));
+        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.3994"));
+
+        InvoiceViewModel recieved = service.saveInvoice(invoice);
+        assertEquals(invoice, recieved);
 
         // ACT
         //invoice = service.saveInvoice(invoice);
@@ -296,10 +315,11 @@ public class ServiceLayerTest {
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal(10.00));
-        invoice.setTax(new BigDecimal(.8));
-        invoice.setProcessingFee(new BigDecimal(1.25));
-        invoice.setTotal(new BigDecimal(15.00));
+        invoice.setUnitPrice(new BigDecimal("406.99"));
+        invoice.setSubtotal(new BigDecimal("406.99"));
+        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.3994"));
 
         InvoiceViewModel invoiceViewModel = service.findInvoice(1);
         assertEquals(invoiceViewModel, invoice);
@@ -317,10 +337,11 @@ public class ServiceLayerTest {
         invoice.setItemType("Console");
         invoice.setItemId(1);
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal(10.00));
-        invoice.setTax(new BigDecimal(.8));
-        invoice.setProcessingFee(new BigDecimal(1.25));
-        invoice.setTotal(new BigDecimal(15.00));
+        invoice.setUnitPrice(new BigDecimal("406.99"));
+        invoice.setSubtotal(new BigDecimal("406.99"));
+        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.3994"));
 
 
         InvoiceViewModel invoice2 = new InvoiceViewModel();
@@ -396,7 +417,7 @@ public class ServiceLayerTest {
         List<Console> bList = new ArrayList<>();
         bList.add(console);
 
-        doReturn(console).when(consoleRepo).save(console2);
+        doReturn(console).when(consoleRepo).save(console);
         doReturn(Optional.of(console)).when(consoleRepo).findById(1);
         doReturn(bList).when(consoleRepo).findAll();
         doReturn(bList).when(consoleRepo).findConsoleByManufacturer("Microsoft");
@@ -421,7 +442,7 @@ public class ServiceLayerTest {
 
         // act
         newConsole = service.saveConsole(newConsole);
-        assertTrue(sampleConsole.isEmpty());
+        assertTrue(!sampleConsole.isEmpty());
 
     }
 

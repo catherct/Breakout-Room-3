@@ -30,7 +30,7 @@ public class TshirtController {
         TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
         if (targetShirt == null) {
-            throw new NullPointerException("Error: Entry does not exist.");
+            throw new NullPointerException("Error: T-Shirt does not exist.");
         }
         return targetShirt;
     }

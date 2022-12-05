@@ -3,6 +3,9 @@ package com.company.gamestore.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -16,21 +19,45 @@ public class Invoice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty(message = "You must enter a name")
+    @Size(min = 1, max = 80, message = "Error: Size cannot be less than 1 character or be more than 50 characters")
     private String name;
+    @NotEmpty(message = "You must enter a street")
+    @Size(min = 1, max = 30, message = "Error: Size cannot be less than 1 character or be more than 30 characters")
     private String street;
+    @NotEmpty(message = "You must enter a city")
+    @Size(min = 1, max = 30, message = "Error: Size cannot be less than 1 character or be more than 30 characters")
     private String city;
+    @NotEmpty(message = "You must enter a state")
+    @Size(min = 1, max = 30, message = "Error: Size cannot be less than 1 character or be more than 2 characters")
     private String state;
+    @NotEmpty(message = "You must enter a zipcode")
+    @Size(min = 1, max = 5, message = "Error: Size cannot be less than 1 character or be more than 5 characters")
     private String zipcode;
+    @NotEmpty(message = "You must enter an item type")
+    @Size(min = 1, max = 20, message = "Error: Size cannot be less than 1 character or be more than 20 characters")
     private String itemType;
 
+    @NotEmpty(message = "You must enter a item id")
     @Column(name = "item_id")
     private int itemId;
 
+    @NotEmpty(message = "You must enter a unit price ")
+    @Digits(integer = 5, fraction = 2)
     private BigDecimal unitPrice;
+    @NotEmpty(message = "You must enter a quantity")
     private int quantity;
+    @NotEmpty(message = "You must enter a subtotal")
+    @Digits(integer = 5, fraction = 2)
     private BigDecimal subtotal;
+    @NotEmpty(message = "You must enter a tax")
+    @Digits(integer = 5, fraction = 2)
     private BigDecimal tax;
+    @NotEmpty(message = "You must enter a processing fee")
+    @Digits(integer = 5, fraction = 2)
     private BigDecimal processingFee;
+    @NotEmpty(message = "You must enter a total")
+    @Digits(integer = 5, fraction = 2)
     private BigDecimal total;
 
     public int getId() {

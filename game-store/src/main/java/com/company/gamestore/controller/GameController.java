@@ -26,7 +26,12 @@ public class GameController {
     @GetMapping("/game/id/{id}")
     @ResponseStatus(HttpStatus.OK)
     public GameViewModel getGameById(@PathVariable Integer id){
-        return serviceLayer.findGame(id);
+        GameViewModel gameViewModel = serviceLayer.findGame(id);
+        if(gameViewModel == null){
+            throw new NullPointerException("Error: That game does not exist.");
+        }
+
+        return gameViewModel;
     }
 
     @GetMapping("/game")
@@ -41,7 +46,7 @@ public class GameController {
         serviceLayer.updateGame(game);
     }
 
-    @DeleteMapping("/game")
+    @DeleteMapping("/game/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteGame(@PathVariable Integer id){
         serviceLayer.deleteGame(id);
