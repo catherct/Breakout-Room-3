@@ -38,7 +38,7 @@ public class TshirtController {
     // retrieve all shirts
     @GetMapping("/tshirt")
     @ResponseStatus(HttpStatus.OK)
-    public List<TshirtViewModel> getAllShirts() {
+    public List<TshirtViewModel> findAllShirts() {
 
         return serviceLayer.findAllTShirts();
     }
@@ -60,11 +60,15 @@ public class TshirtController {
 
         TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
+        if (targetShirt == null) {
+            throw new NullPointerException("Error: Entry does not exist.");
+        }
+
         serviceLayer.deleteTShirt(id);
     }
 
     // retrieve shirt by color
-    @GetMapping("/tshirt/{color}")
+    @GetMapping("/tshirt/color/{color}")
     @ResponseStatus(HttpStatus.OK)
     public List<TshirtViewModel> findByColor(@PathVariable String color) {
 
@@ -72,7 +76,7 @@ public class TshirtController {
     }
 
     // retrieve shirt by size
-    @GetMapping("/tshirt/{size}")
+    @GetMapping("/tshirt/size/{size}")
     @ResponseStatus(HttpStatus.OK)
     public List<TshirtViewModel> findBySize(@PathVariable String size) {
 
