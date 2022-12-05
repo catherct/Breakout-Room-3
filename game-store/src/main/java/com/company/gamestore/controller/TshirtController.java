@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,7 +18,7 @@ public class TshirtController {
     // create new shirt
     @PostMapping("/tshirt")
     @ResponseStatus(HttpStatus.CREATED)
-    public TshirtViewModel createTshirt(@RequestBody TshirtViewModel shirt) {
+    public TshirtViewModel createTshirt(@Valid @RequestBody TshirtViewModel shirt) {
 
         return serviceLayer.saveTShirt(shirt);
     }
@@ -25,7 +26,7 @@ public class TshirtController {
     // retrieve shirt by id
     @GetMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public TshirtViewModel getShirt(@PathVariable Integer id) {
+    public TshirtViewModel getShirt(@Valid @PathVariable Integer id) {
 
         TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
@@ -46,7 +47,7 @@ public class TshirtController {
     // update existing shirt
     @PutMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateShirt(@PathVariable Integer id, @RequestBody TshirtViewModel shirt) {
+    public void updateShirt(@Valid @PathVariable Integer id, @RequestBody TshirtViewModel shirt) {
 
         TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
@@ -56,7 +57,7 @@ public class TshirtController {
     // delete existing shirt
     @DeleteMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteShirt(@PathVariable Integer id) {
+    public void deleteShirt(@Valid @PathVariable Integer id) {
 
         TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
 
@@ -70,7 +71,7 @@ public class TshirtController {
     // retrieve shirt by color
     @GetMapping("/tshirt/color/{color}")
     @ResponseStatus(HttpStatus.OK)
-    public List<TshirtViewModel> findByColor(@PathVariable String color) {
+    public List<TshirtViewModel> findByColor(@Valid @PathVariable String color) {
 
         return serviceLayer.findTShirtsByColor(color);
     }
@@ -78,7 +79,7 @@ public class TshirtController {
     // retrieve shirt by size
     @GetMapping("/tshirt/size/{size}")
     @ResponseStatus(HttpStatus.OK)
-    public List<TshirtViewModel> findBySize(@PathVariable String size) {
+    public List<TshirtViewModel> findBySize(@Valid @PathVariable String size) {
 
         return serviceLayer.findTShirtsBySize(size);
     }
