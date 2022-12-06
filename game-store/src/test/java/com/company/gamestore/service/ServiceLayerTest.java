@@ -223,7 +223,7 @@ public class ServiceLayerTest {
         invoice.setQuantity(1);
         invoice.setUnitPrice(new BigDecimal("406.99"));
         invoice.setSubtotal(new BigDecimal("406.99"));
-        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setTax(new BigDecimal("24.41"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
         invoice.setTotal(new BigDecimal("446.39"));
 
@@ -235,12 +235,13 @@ public class ServiceLayerTest {
         invoice2.setState("CA");
         invoice2.setZipcode("93314");
         invoice2.setItemType("Game");
-        invoice2.setItemId(32);
-        invoice2.setQuantity(4);
-        invoice2.setSubtotal(new BigDecimal(11.00));
-        invoice2.setTax(new BigDecimal(.7));
-        invoice2.setProcessingFee(new BigDecimal(1.30));
-        invoice2.setTotal(new BigDecimal(10.00));
+        invoice2.setItemId(1);
+        invoice2.setQuantity(1);
+        invoice2.setUnitPrice(new BigDecimal("60.00"));
+        invoice2.setSubtotal(new BigDecimal("60.00"));
+        invoice2.setTax(new BigDecimal("3.60"));
+        invoice2.setProcessingFee(new BigDecimal("1.49"));
+        invoice2.setTotal(new BigDecimal("65.09"));
 
         List<Invoice> iList = new ArrayList<>();
         iList.add(invoice);
@@ -277,7 +278,6 @@ public class ServiceLayerTest {
 
     @Test
     public void shouldSaveInvoice() {
-        // TODO fix this function
         // Arrange
         InvoiceViewModel invoice = new InvoiceViewModel();
         invoice.setId(1);
@@ -291,16 +291,13 @@ public class ServiceLayerTest {
         invoice.setQuantity(1);
         invoice.setUnitPrice(new BigDecimal("406.99"));
         invoice.setSubtotal(new BigDecimal("406.99"));
-        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setTax(new BigDecimal("24.41"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
         invoice.setTotal(new BigDecimal("446.39"));
 
-        InvoiceViewModel recieved = service.saveInvoice(invoice);
-        assertEquals(invoice, recieved);
-
-        // ACT
-        //invoice = service.saveInvoice(invoice);
-        //assertEquals(expectedResult, invoice);
+        // Act
+        InvoiceViewModel received = service.saveInvoice(invoice);
+        assertEquals(invoice, received);
     }
 
     @Test
@@ -317,11 +314,13 @@ public class ServiceLayerTest {
         invoice.setQuantity(1);
         invoice.setUnitPrice(new BigDecimal("406.99"));
         invoice.setSubtotal(new BigDecimal("406.99"));
-        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setTax(new BigDecimal("24.41"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
         invoice.setTotal(new BigDecimal("446.39"));
 
         InvoiceViewModel invoiceViewModel = service.findInvoice(1);
+        System.out.println(invoiceViewModel.toString());
+        System.out.println(invoice.toString());
         assertEquals(invoiceViewModel, invoice);
     }
 
@@ -339,7 +338,7 @@ public class ServiceLayerTest {
         invoice.setQuantity(1);
         invoice.setUnitPrice(new BigDecimal("406.99"));
         invoice.setSubtotal(new BigDecimal("406.99"));
-        invoice.setTax(new BigDecimal("0.06"));
+        invoice.setTax(new BigDecimal("24.41"));
         invoice.setProcessingFee(new BigDecimal("14.99"));
         invoice.setTotal(new BigDecimal("446.39"));
 
