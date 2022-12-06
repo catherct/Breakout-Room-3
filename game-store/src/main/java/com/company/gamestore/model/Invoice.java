@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -46,19 +45,14 @@ public class Invoice implements Serializable {
     @NotNull(message = "You must enter a quantity")
     private Integer quantity;
 
-    /*@NotNull(message = "You must enter a unit price ")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal unitPrice;
-    /*@NotNull(message = "You must enter a subtotal")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal subtotal;
-    /*@NotNull(message = "You must enter a tax")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal tax;
-    /*@NotNull(message = "You must enter a processing fee")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal processingFee;
-    /*@NotNull(message = "You must enter a total")*/
     @Digits(integer = 5, fraction = 2)
     private BigDecimal total;
 

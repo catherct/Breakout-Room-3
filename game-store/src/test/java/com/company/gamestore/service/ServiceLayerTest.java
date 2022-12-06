@@ -5,9 +5,7 @@ import com.company.gamestore.model.*;
 import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.GameViewModel;
 
-import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
-import com.company.gamestore.repository.*;
 import com.company.gamestore.viewmodel.InvoiceViewModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.company.gamestore.viewmodel.TshirtViewModel;
-import com.company.gamestore.viewmodel.InvoiceViewModel;
 import static junit.framework.TestCase.*;
 
 import static org.mockito.Mockito.doReturn;

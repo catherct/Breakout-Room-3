@@ -1,6 +1,5 @@
 package com.company.gamestore.viewmodel;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
 import java.util.Objects;
 

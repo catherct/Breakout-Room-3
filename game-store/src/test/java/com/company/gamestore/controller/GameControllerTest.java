@@ -1,8 +1,6 @@
 package com.company.gamestore.controller;
 
-import com.company.gamestore.model.Game;
 import com.company.gamestore.service.ServiceLayer;
-import com.company.gamestore.viewmodel.ConsoleViewModel;
 import com.company.gamestore.viewmodel.GameViewModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
@@ -18,7 +16,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

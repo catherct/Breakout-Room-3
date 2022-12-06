@@ -1,7 +1,5 @@
 package com.company.gamestore.controller;
 
-import com.company.gamestore.model.Console;
-import com.company.gamestore.repository.ConsoleControllerRepository;
 import com.company.gamestore.service.ServiceLayer;
 import com.company.gamestore.viewmodel.ConsoleViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 public class ConsoleController {
     @Autowired
