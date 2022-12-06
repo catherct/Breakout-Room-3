@@ -481,10 +481,12 @@ public class ServiceLayer {
             total = total.add(BigDecimal.valueOf(15.49));
         }
 
-        // Set total to two decimal points
+        // Set total and saleTax to two decimal points
+        saleTax = saleTax.setScale(2, RoundingMode.FLOOR);
         total = total.setScale(2, RoundingMode.FLOOR);
 
-        //sets the total
+        //sets the total and saleTax
+        invoice.setTax(saleTax);
         invoice.setTotal(total);
 
         invoice = invoiceRepo.save(invoice);

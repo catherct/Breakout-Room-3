@@ -1,5 +1,7 @@
 package com.company.gamestore.repository;
 
+import com.company.gamestore.model.Console;
+import com.company.gamestore.model.Game;
 import com.company.gamestore.model.Invoice;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,6 +21,10 @@ import static org.junit.Assert.*;
 public class InvoiceRepositoryTest {
     @Autowired
     InvoiceRepository invoiceRepository;
+    @Autowired
+    ConsoleControllerRepository consoleRepository;
+    @Autowired
+    GameControllerRepository gameRepository;
 
     @Before
     public void setUp() throws Exception {
@@ -27,6 +33,16 @@ public class InvoiceRepositoryTest {
 
     @Test
     public void addGetDeleteInvoice() {
+        Console console = new Console();
+        console.setModel("Xbox-360");
+        console.setManufacturer("Microsoft");
+        console.setMemory_amount("512MB");
+        console.setProcessor("Xenon");
+        console.setPrice(new BigDecimal("406.99"));
+        console.setQuantity(20);
+
+        console = consoleRepository.save(console);
+
         Invoice invoice = new Invoice();
         invoice.setName("Jose Salgado");
         invoice.setStreet("1 Irvine Ln.");
@@ -34,13 +50,13 @@ public class InvoiceRepositoryTest {
         invoice.setState("CA");
         invoice.setZipcode("92617");
         invoice.setItemType("Console");
-        invoice.setItemId(1);
-        invoice.setUnitPrice(new BigDecimal("100.00"));
+        invoice.setItemId(console.getConsole_id());
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal("10.00"));
-        invoice.setTax(new BigDecimal("0.80"));
-        invoice.setProcessingFee(new BigDecimal("1.25"));
-        invoice.setTotal(new BigDecimal("15.00"));
+        invoice.setUnitPrice(console.getPrice());
+        invoice.setSubtotal(console.getPrice());
+        invoice.setTax(new BigDecimal("24.41"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         // Add
         invoice = invoiceRepository.save(invoice);
@@ -57,6 +73,16 @@ public class InvoiceRepositoryTest {
 
     @Test
     public void updateInvoice() {
+        Console console = new Console();
+        console.setModel("Xbox-360");
+        console.setManufacturer("Microsoft");
+        console.setMemory_amount("512MB");
+        console.setProcessor("Xenon");
+        console.setPrice(new BigDecimal("406.99"));
+        console.setQuantity(20);
+
+        console = consoleRepository.save(console);
+
         Invoice invoice = new Invoice();
         invoice.setName("Jose Salgado");
         invoice.setStreet("1 Irvine Ln.");
@@ -64,20 +90,19 @@ public class InvoiceRepositoryTest {
         invoice.setState("CA");
         invoice.setZipcode("92617");
         invoice.setItemType("Console");
-        invoice.setItemId(1);
-        invoice.setUnitPrice(new BigDecimal("100.00"));
+        invoice.setItemId(console.getConsole_id());
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal("10.00"));
-        invoice.setTax(new BigDecimal("0.80"));
-        invoice.setProcessingFee(new BigDecimal("1.25"));
-        invoice.setTotal(new BigDecimal("15.00"));
+        invoice.setUnitPrice(console.getPrice());
+        invoice.setSubtotal(console.getPrice());
+        invoice.setTax(new BigDecimal("24.41"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         // Add
         invoice = invoiceRepository.save(invoice);
 
         // Update
         invoice.setName("Jose Salgado Jr.");
-        invoice.setQuantity(2);
         invoice.setZipcode("92612");
 
         invoiceRepository.save(invoice);
@@ -89,20 +114,40 @@ public class InvoiceRepositoryTest {
 
     @Test
     public void getInvoiceByName() {
+        Game game = new Game();
+        game.setTitle("Halo");
+        game.setEsrbRating("M");
+        game.setDescription("FPS");
+        game.setPrice(new BigDecimal("60.00"));
+        game.setStudio("Bungie");
+        game.setQuantity(20);
+
+        game = gameRepository.save(game);
+
+        Console console = new Console();
+        console.setModel("Xbox-360");
+        console.setManufacturer("Microsoft");
+        console.setMemory_amount("512MB");
+        console.setProcessor("Xenon");
+        console.setPrice(new BigDecimal("406.99"));
+        console.setQuantity(20);
+
+        console = consoleRepository.save(console);
+
         Invoice invoice = new Invoice();
         invoice.setName("Jose Salgado");
         invoice.setStreet("1 Irvine Ln.");
         invoice.setCity("Irvine");
         invoice.setState("CA");
         invoice.setZipcode("92617");
-        invoice.setItemType("Console");
-        invoice.setItemId(1);
-        invoice.setUnitPrice(new BigDecimal("100.00"));
+        invoice.setItemType("Game");
+        invoice.setItemId(game.getId());
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal("10.00"));
-        invoice.setTax(new BigDecimal(".8"));
-        invoice.setProcessingFee(new BigDecimal("1.25"));
-        invoice.setTotal(new BigDecimal("15.00"));
+        invoice.setUnitPrice(new BigDecimal("60.00"));
+        invoice.setSubtotal(new BigDecimal("60.00"));
+        invoice.setTax(new BigDecimal("3.60"));
+        invoice.setProcessingFee(new BigDecimal("1.49"));
+        invoice.setTotal(new BigDecimal("65.09"));
 
         // Add 1
         invoice = invoiceRepository.save(invoice);
@@ -113,32 +158,32 @@ public class InvoiceRepositoryTest {
         invoice.setCity("Bakersfield");
         invoice.setState("CA");
         invoice.setZipcode("93314");
-        invoice.setItemType("Game");
-        invoice.setItemId(32);
-        invoice.setUnitPrice(new BigDecimal("70.00"));
-        invoice.setQuantity(4);
-        invoice.setSubtotal(new BigDecimal("11.00"));
-        invoice.setTax(new BigDecimal(".7"));
-        invoice.setProcessingFee(new BigDecimal("1.30"));
-        invoice.setTotal(new BigDecimal("10.00"));
+        invoice.setItemType("Console");
+        invoice.setItemId(console.getConsole_id());
+        invoice.setQuantity(1);
+        invoice.setUnitPrice(console.getPrice());
+        invoice.setSubtotal(console.getPrice());
+        invoice.setTax(new BigDecimal("24.41"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         // Add 2
         invoice = invoiceRepository.save(invoice);
 
         invoice = new Invoice();
         invoice.setName("Jose Salgado");
-        invoice.setStreet("4 Oak St.");
+        invoice.setStreet("4 4th St.");
         invoice.setCity("Bakersfield");
         invoice.setState("CA");
         invoice.setZipcode("93314");
-        invoice.setItemType("Game");
-        invoice.setItemId(30);
-        invoice.setUnitPrice(new BigDecimal("70.00"));
-        invoice.setQuantity(2);
-        invoice.setSubtotal(new BigDecimal("15.00"));
-        invoice.setTax(new BigDecimal(".7"));
-        invoice.setProcessingFee(new BigDecimal("1.30"));
-        invoice.setTotal(new BigDecimal("10.00"));
+        invoice.setItemType("Console");
+        invoice.setItemId(console.getConsole_id());
+        invoice.setQuantity(1);
+        invoice.setUnitPrice(console.getPrice());
+        invoice.setSubtotal(console.getPrice());
+        invoice.setTax(new BigDecimal("24.41"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         // Add 3
         invoice = invoiceRepository.save(invoice);
@@ -150,20 +195,40 @@ public class InvoiceRepositoryTest {
 
     @Test
     public void getAllInvoices() {
+        Game game = new Game();
+        game.setTitle("Halo");
+        game.setEsrbRating("M");
+        game.setDescription("FPS");
+        game.setPrice(new BigDecimal("60.00"));
+        game.setStudio("Bungie");
+        game.setQuantity(20);
+
+        game = gameRepository.save(game);
+
+        Console console = new Console();
+        console.setModel("Xbox-360");
+        console.setManufacturer("Microsoft");
+        console.setMemory_amount("512MB");
+        console.setProcessor("Xenon");
+        console.setPrice(new BigDecimal("406.99"));
+        console.setQuantity(20);
+
+        console = consoleRepository.save(console);
+
         Invoice invoice = new Invoice();
         invoice.setName("Jose Salgado");
         invoice.setStreet("1 Irvine Ln.");
         invoice.setCity("Irvine");
         invoice.setState("CA");
         invoice.setZipcode("92617");
-        invoice.setItemType("Console");
-        invoice.setItemId(1);
-        invoice.setUnitPrice(new BigDecimal("100.00"));
+        invoice.setItemType("Game");
+        invoice.setItemId(game.getId());
         invoice.setQuantity(1);
-        invoice.setSubtotal(new BigDecimal("10.00"));
-        invoice.setTax(new BigDecimal(".8"));
-        invoice.setProcessingFee(new BigDecimal("1.25"));
-        invoice.setTotal(new BigDecimal("15.00"));
+        invoice.setUnitPrice(new BigDecimal("60.00"));
+        invoice.setSubtotal(new BigDecimal("60.00"));
+        invoice.setTax(new BigDecimal("3.60"));
+        invoice.setProcessingFee(new BigDecimal("1.49"));
+        invoice.setTotal(new BigDecimal("65.09"));
 
         // Add 1
         invoice = invoiceRepository.save(invoice);
@@ -174,32 +239,32 @@ public class InvoiceRepositoryTest {
         invoice.setCity("Bakersfield");
         invoice.setState("CA");
         invoice.setZipcode("93314");
-        invoice.setItemType("Game");
-        invoice.setItemId(32);
-        invoice.setUnitPrice(new BigDecimal("70.00"));
-        invoice.setQuantity(4);
-        invoice.setSubtotal(new BigDecimal("11.00"));
-        invoice.setTax(new BigDecimal("0.70"));
-        invoice.setProcessingFee(new BigDecimal("1.30"));
-        invoice.setTotal(new BigDecimal("10.00"));
+        invoice.setItemType("Console");
+        invoice.setItemId(console.getConsole_id());
+        invoice.setQuantity(1);
+        invoice.setUnitPrice(console.getPrice());
+        invoice.setSubtotal(console.getPrice());
+        invoice.setTax(new BigDecimal("24.41"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         // Add 2
         invoice = invoiceRepository.save(invoice);
 
         invoice = new Invoice();
         invoice.setName("Jose Salgado");
-        invoice.setStreet("4 Oak St.");
+        invoice.setStreet("4 4th St.");
         invoice.setCity("Bakersfield");
         invoice.setState("CA");
         invoice.setZipcode("93314");
-        invoice.setItemType("Game");
-        invoice.setItemId(30);
-        invoice.setUnitPrice(new BigDecimal("70.00"));
-        invoice.setQuantity(2);
-        invoice.setSubtotal(new BigDecimal("15.00"));
-        invoice.setTax(new BigDecimal("0.70"));
-        invoice.setProcessingFee(new BigDecimal("1.30"));
-        invoice.setTotal(new BigDecimal("10.00"));
+        invoice.setItemType("Console");
+        invoice.setItemId(console.getConsole_id());
+        invoice.setQuantity(1);
+        invoice.setUnitPrice(console.getPrice());
+        invoice.setSubtotal(console.getPrice());
+        invoice.setTax(new BigDecimal("24.41"));
+        invoice.setProcessingFee(new BigDecimal("14.99"));
+        invoice.setTotal(new BigDecimal("446.39"));
 
         // Add 3
         invoice = invoiceRepository.save(invoice);
