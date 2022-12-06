@@ -431,6 +431,8 @@ public class ServiceLayer {
             if(invoice.getQuantity() > game.get().getQuantity()){
                 throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
             }
+            game.get().setQuantity(game.get().getQuantity() - invoice.getQuantity());
+            gameRepo.save(game.get());
         }
         else if(invoice.getItemType().equals("T-Shirt")){
                 Optional<Tshirt> tshirt = tshirtRepo.findById(invoice.getItemId());
@@ -440,6 +442,8 @@ public class ServiceLayer {
             if(invoice.getQuantity() > tshirt.get().getQuantity()){
                 throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
             }
+            tshirt.get().setQuantity(tshirt.get().getQuantity() - invoice.getQuantity());
+            tshirtRepo.save(tshirt.get());
         }
         else if(invoice.getItemType().equals("Console")){
                 Optional<Console> console = consoleRepo.findById(invoice.getItemId());
@@ -449,6 +453,8 @@ public class ServiceLayer {
             if(invoice.getQuantity() > console.get().getQuantity()){
                 throw new IllegalArgumentException("Quantity cannot be higher than inventory amount");
             }
+            console.get().setQuantity(console.get().getQuantity() - invoice.getQuantity());
+            consoleRepo.save(console.get());
         }
         else {
             throw new IllegalArgumentException("That item is not in the inventory");
@@ -467,8 +473,15 @@ public class ServiceLayer {
         //gets the subtotal by multiplying the unitprice by the quantity amount
         total = total.add(unitPrice.multiply(BigDecimal.valueOf(invoice.getQuantity())));
 
+        // Set subTotal to two decimal points
+        BigDecimal subTotal = total.setScale(2, RoundingMode.FLOOR);
+        // Throw exception if subtotal greater than 999.99
+        if (subTotal.compareTo(new BigDecimal("999.99")) == 1) {
+            throw new IllegalArgumentException("Invoice subtotal must be less than 999.99");
+        }
+
         //subtotal is the total before the sales tax and processing fee
-        invoice.setSubtotal(total);
+        invoice.setSubtotal(subTotal);
 
         //will calculate the sales tax check to make an exception here
         BigDecimal saleTax = salesTax.get().getRate().multiply(total);
@@ -484,6 +497,11 @@ public class ServiceLayer {
         // Set total and saleTax to two decimal points
         saleTax = saleTax.setScale(2, RoundingMode.FLOOR);
         total = total.setScale(2, RoundingMode.FLOOR);
+
+        // Throw exception if total greater than 999.99
+        if (total.compareTo(new BigDecimal("999.99")) == 1) {
+            throw new IllegalArgumentException("Invoice total must be less than 999.99");
+        }
 
         //sets the total and saleTax
         invoice.setTax(saleTax);
