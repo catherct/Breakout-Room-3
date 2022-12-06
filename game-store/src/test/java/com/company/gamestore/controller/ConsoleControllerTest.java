@@ -111,11 +111,6 @@ public class ConsoleControllerTest {
 
     // Testing GET allConsole
 
-//    @Before
-//    public void setUp() {
-//        // Standard set up method, for instantiating test objects
-//        // Don't have to do anything special for mockMvc since it's Autowired
-//    }
     private List<ConsoleViewModel> consoleList=new ArrayList<>();
     @Test
     public void shouldReturnAllConsoles() throws Exception {

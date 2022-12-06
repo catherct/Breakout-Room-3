@@ -175,15 +175,6 @@ public class ServiceLayer {
     }
     //Console Api
 
-//    @Transactional
-//    public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
-//        Console console = buildConsole(viewModel);
-//
-//        console =  consoleRepo.save(console);
-//        viewModel.setId(console.getConsole_id());
-//        return viewModel;
-//    }
-
     @Transactional
     public ConsoleViewModel saveConsole(ConsoleViewModel viewModel){
         Console console = buildConsole(viewModel);

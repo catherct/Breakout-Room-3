@@ -212,68 +212,6 @@ public class TshirtControllerTest {
                 .andExpect(content().json(outputJson));
     }
 
-//    // testing UPDATE /tshirt/{id}
-//    @Test
-//    public void shouldUpdateShirtOnPutRequest() throws Exception {
-//
-//        // arrange
-//        TshirtViewModel inputShirt = new TshirtViewModel();
-//        inputShirt.setId(2);
-//        inputShirt.setSize("large");
-//        inputShirt.setColor("blue");
-//        inputShirt.setDescription("large blue shirt");
-//        inputShirt.setPrice(BigDecimal.valueOf(13.99));
-//        inputShirt.setQuantity(2);
-//
-//        // convert Java object to JSON      -- is necessary?
-//        String inputJson = mapper.writeValueAsString(inputShirt);
-//
-//        TshirtViewModel outputShirt = new TshirtViewModel();
-//        outputShirt.setId(2);
-//        outputShirt.setSize("small");
-//        outputShirt.setColor("blue");
-//        outputShirt.setDescription("small blue shirt");
-//        outputShirt.setPrice(BigDecimal.valueOf(13.99));
-//        outputShirt.setQuantity(2);
-//
-//        // convert Java object to JSON
-//        String outputJson = mapper.writeValueAsString(outputShirt);
-//
-//        // act
-//        mockMvc.perform(
-//                        put("/tshirt/2")
-//                                .content(outputJson)
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isOk());    // HTTP STATUS 200 -- should code be changed?
-//    }
-//
-//    // testing DELETE /tshirt/{id}
-//    @Test
-//    public void shouldDeleteShirt() throws Exception {
-//
-//        // arrange
-//        TshirtViewModel outputShirt = new TshirtViewModel();
-//        outputShirt.setId(2);
-//        outputShirt.setSize("large");
-//        outputShirt.setColor("blue");
-//        outputShirt.setDescription("large blue shirt");
-//        outputShirt.setPrice(BigDecimal.valueOf(13.99));
-//        outputShirt.setQuantity(2);
-//
-//        // convert Java object to JSON
-//        String outputJson = mapper.writeValueAsString(outputShirt);
-//
-//        when(serviceLayer.findTShirt(2)).thenReturn(outputShirt);
-//
-//        // act
-//        mockMvc.perform(
-//                        delete("/tshirt/2")
-//                                .content(outputJson)
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                )
-//                .andExpect(status().isNoContent());   // HTTP STATUS 204
-//    }
 
     @Test
     public void shouldHandleInvalidId() throws Exception {

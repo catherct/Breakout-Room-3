@@ -7,6 +7,5 @@ import java.util.List;
 @Repository
 public interface ConsoleControllerRepository extends JpaRepository<Console, Integer>{
 
-    //    List<Console> findConsoleById(int id);
     List<Console> findConsoleByManufacturer (String manufacturer);
 }

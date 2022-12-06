@@ -271,37 +271,4 @@ public class InvoiceControllerTest {
                 .andExpect(status().is4xxClientError());
 
     }
-
-/*    // Testing PUT /invoice
-    @Test
-    public void shouldUpdateInvoice() throws Exception {
-        InvoiceViewModel inputInvoice = new InvoiceViewModel();
-        inputInvoice.setName("Jose Salgado");
-        inputInvoice.setStreet("1 Silver Ln.");
-        inputInvoice.setCity("Shafter");
-        inputInvoice.setState("CA");
-        inputInvoice.setZipcode("93263");
-        inputInvoice.setItemType("Console");
-        inputInvoice.setItemId(1);
-        inputInvoice.setQuantity(3);
-        inputInvoice.setId(1);
-
-        String inputJson = mapper.writeValueAsString(inputInvoice);
-
-        mockMvc.perform(
-                put("/invoice")
-                        .content(inputJson)
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
-                .andDo(print())
-                .andExpect(status().isNoContent());
-    }
-
-    // Testing DELETE /invoice/{id}
-    @Test
-    public void shouldDeleteById() throws Exception {
-        mockMvc.perform(delete("/invoice/1"))
-                .andDo(print())
-                .andExpect(status().isNoContent());
-    }*/
 }
