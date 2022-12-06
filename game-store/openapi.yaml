@@ -3,7 +3,7 @@ info:
   title: OpenAPI definition
   version: v0
 servers:
-  - url: http://localhost:8080
+  - url: http://gamestore-env.eba-mzfy5mc8.us-west-1.elasticbeanstalk.com
     description: Generated server url
 paths:
   /tshirt/{id}:
