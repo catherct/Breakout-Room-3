@@ -48,10 +48,9 @@ public class TshirtController {
     @PutMapping("/tshirt/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateShirt(@Valid @PathVariable Integer id, @RequestBody TshirtViewModel shirt) {
-
+        // check if shirt exists before update
         TshirtViewModel targetShirt = serviceLayer.findTShirt(id);
-
-        serviceLayer.updateTShirt(targetShirt);
+        serviceLayer.updateTShirt(shirt);
     }
 
     // delete existing shirt
